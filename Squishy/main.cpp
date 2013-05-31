@@ -7,6 +7,7 @@
 #include "math.h"
 #include "stb_image.h"
 #include <mmsystem.h>
+#include <process.h>     
 
 // all variables initialized to 1.0, meaning
 // the trihangle will initially be white
@@ -24,9 +25,24 @@ float light_position[] = {x, 1.0, z, 0.0};
 static float amb[] =  {0.4, 0.4, 0.4, 0.0};
 static float dif[] =  {1.0, 1.0, 1.0, 0.0};
 
+float FogCol[3]={0.0f,0.0f,0.0f};
+
 GLuint floorTexture;
 GLuint introTexture;
 int gamestate = 1;
+LPCSTR soundToPlay;
+int soundLenght;
+
+void playBackground(void *arg)
+{
+	PlaySound(soundToPlay, NULL, SND_LOOP);
+}
+
+void  startSound(LPCSTR pszSound, int soundLenght)
+{
+	soundToPlay = pszSound;
+	_beginthread(playBackground, 0, (void*)12 );
+}
 
 cv::Mat texturizeBackground(int cam)
 {
@@ -90,7 +106,7 @@ void renderScene(void)
 
 	if(gamestate == 1) //launch menu
 	{
-		PlaySound("C:/gameover.wav", NULL, SND_LOOP);
+		startSound("C:/kirby.wav", 100);
 		glTranslatef(1.0f, 2.0f, 0.0f);
 		gluLookAt(      x, 1.0f, z,
                     x+lx, 1.0f,  z+lz,
@@ -112,19 +128,25 @@ void renderScene(void)
 		glEnd();
 	}
 
-	else //Launch actual game
+	else //Render game
 	{
+		gluLookAt(  x, 1.0f, z,
+                    x+lx, 1.0f,  z+lz,
+                    0.0f, 1.0f,  0.0f);
+		glRotatef(vangle, 1.0f, 0.0f, 0.0f);
+		glRotatef(hangle, 0.0f, 1.0f, 0.0f);
+
 		glBindTexture( GL_TEXTURE_2D, floorTexture );
 
 		glBegin( GL_QUADS );
 	
-		glVertex2f(-100,-200.0);
+		glVertex3f(-100, 0, -200.0);
 		glTexCoord2f(0, 0);
-		glVertex2f(100,-200.0);
+		glVertex3f(100, 0, -200.0);
 		glTexCoord2f(0, 1);
-		glVertex2f(100.0, 200.0);
+		glVertex3f(100.0, 0, 200.0);
 		glTexCoord2f(1, 1);
-		glVertex2f(-100.0, 200.0);
+		glVertex3f(-100.0, 0, 200.0);
 		glTexCoord2f(1, 0);
 
 		glEnd();
@@ -182,24 +204,24 @@ void processSpecialKeys(int key, int xx, int yy)
 		{
 			switch (key) {
 					case GLUT_KEY_LEFT :
-							hangle -= 0.5f;/*
+							//hangle -= 0.5f;
 							lx = sin(hangle);
-							lz = -cos(hangle);*/
+							lz = -cos(hangle);
 							break;
 					case GLUT_KEY_RIGHT :
-							hangle += 0.5f;/*
+							//hangle += 0.5f;
 							lx = sin(hangle);
-							lz = -cos(hangle);*/
+							lz = -cos(hangle);
 							break;
 					case GLUT_KEY_UP :
-							vangle -= 0.5f;
-							//x += lx * fraction;
-							//z += lz * fraction;
+							//vangle -= 0.5f;
+							x += lx * fraction;
+							z += lz * fraction;
 							break;
 					case GLUT_KEY_DOWN :
-							vangle += 0.5f;
-					/*      x -= lx * fraction;
-							z -= lz * fraction;*/
+							//vangle += 0.5f;
+					        x -= lx * fraction;
+							z -= lz * fraction;
 							break;
 			}
         }
@@ -222,16 +244,22 @@ int main(int argc, char **argv)
         glutIdleFunc(renderScene);
         // OpenGL init
         glEnable(GL_DEPTH_TEST);
-        // here are the new entries
+
+		glEnable(GL_FOG);
+		glFogfv(GL_FOG_COLOR,FogCol);
+		glFogi(GL_FOG_MODE, GL_EXP2);
+		glFogf(GL_FOG_DENSITY, 0.02f);
+		glHint(GL_FOG_HINT, GL_NICEST);
+
         glutKeyboardFunc(processNormalKeys);
         glutSpecialFunc(processSpecialKeys);
 
         glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
-    glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-    glEnable(GL_LIGHT0);
-    glEnable(GL_LIGHTING);
-    glMaterialfv(GL_FRONT, GL_AMBIENT, amb);
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, dif);
+		glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+		glEnable(GL_LIGHT0);
+		glEnable(GL_LIGHTING);
+		glMaterialfv(GL_FRONT, GL_AMBIENT, amb);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, dif);
 
         glEnable(GL_COLOR_MATERIAL);
         

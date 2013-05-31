@@ -41,3 +41,8 @@ void GameState::die()
 	{
 		points += number;
 	}
+
+	int GameState::getPoints()
+	{
+		return points;
+	}

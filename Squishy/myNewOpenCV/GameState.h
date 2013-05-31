@@ -8,5 +8,6 @@ public:
 	void regen();
 	void addPoint();
 	void addPoints(int);
+	int getPoints();
 
 };

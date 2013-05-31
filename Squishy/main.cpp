@@ -5,20 +5,15 @@
 #include<BlobResult.h>
 #include <windows.h>
 #include "math.h"
+#include "main.h"
 #include "stb_image.h"
 #include <mmsystem.h>
 #include <process.h>     
 
-// all variables initialized to 1.0, meaning
-// the trihangle will initially be white
 float red=1.0f, blue=1.0f, green=1.0f;
-// hangle of rotation for the camera direction
-float hangle=0.0;
-float vangle=0.0;
-// actual vector representing the camera's direction
 float lx=0.0f,lz=-1.0f;
-// XZ position of the camera
 float x=0.0f,z=2.5f;
+
 //light variables
 float light_diffuse[] = {1.0, 1.0, 1.0, 1.0}; 
 float light_position[] = {x, 1.0, z, 0.0};
@@ -27,21 +22,60 @@ static float dif[] =  {1.0, 1.0, 1.0, 0.0};
 
 float FogCol[3]={0.0f,0.0f,0.0f};
 
+CCamera objCamera; 
+
 GLuint floorTexture;
 GLuint introTexture;
 int gamestate = 1;
 LPCSTR soundToPlay;
-int soundLenght;
 
 void playBackground(void *arg)
 {
 	PlaySound(soundToPlay, NULL, SND_LOOP);
 }
 
-void  startSound(LPCSTR pszSound, int soundLenght)
+void startSound(LPCSTR pszSound, int soundLenght)
 {
 	soundToPlay = pszSound;
 	_beginthread(playBackground, 0, (void*)12 );
+}
+
+void Draw_Character() 
+{
+	glScalef(0.3f,1.0f,0.3f);
+	glTranslatef(0,1.0f,0);
+	glBegin(GL_TRIANGLES);				
+		glColor3f(1.0f,0.0f,0.0f);				
+		glVertex3f( 0.0f, 1.0f, 0.0f);			
+		glVertex3f(-1.0f,-1.0f, 1.0f);			
+		glVertex3f( 1.0f,-1.0f, 1.0f);		
+		glVertex3f( 0.0f, 1.0f, 0.0f);						
+		glVertex3f( 1.0f,-1.0f, 1.0f);					
+		glVertex3f( 1.0f,-1.0f, -1.0f);					
+		glVertex3f( 0.0f, 1.0f, 0.0f);					
+		glVertex3f( 1.0f,-1.0f, -1.0f);					
+		glVertex3f(-1.0f,-1.0f, -1.0f);						
+		glVertex3f( 0.0f, 1.0f, 0.0f);					
+		glVertex3f(-1.0f,-1.0f,-1.0f);					
+		glVertex3f(-1.0f,-1.0f, 1.0f);			
+	glEnd();
+}
+
+void Draw_World()
+{
+		glBindTexture( GL_TEXTURE_2D, floorTexture );
+		glBegin( GL_QUADS );
+	
+		glVertex3f(-100, 0, -200.0);
+		glTexCoord2f(0, 0);
+		glVertex3f(100, 0, -200.0);
+		glTexCoord2f(0, 1);
+		glVertex3f(100.0, 0, 200.0);
+		glTexCoord2f(1, 1);
+		glVertex3f(-100.0, 0, 200.0);
+		glTexCoord2f(1, 0);
+
+		glEnd();
 }
 
 cv::Mat texturizeBackground(int cam)
@@ -90,25 +124,19 @@ GLuint loadTexture(char *filename)
 
 void renderScene(void) 
 {
-    // Clear Color and Depth Buffers
+	objCamera.Mouse_Move(500, 500);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    // Reset transformations
     glLoadIdentity();
-    // Set the camera
-    gluLookAt(      x, 1.0f, z,
-                    x+lx, 1.0f,  z+lz,
-                    0.0f, 1.0f,  0.0f);
-    glRotatef(vangle, 1.0f, 0.0f, 0.0f);
-    glRotatef(hangle, 0.0f, 1.0f, 0.0f);
-
 	glEnable(GL_TEXTURE_2D);
 
 	if(gamestate == 1) //launch menu
 	{
+		gluLookAt(  x, 1.0f, z,
+                    x+lx, 1.0f,  z+lz,
+                    0.0f, 1.0f,  0.0f);
 		startSound("C:/kirby.wav", 100);
 		glTranslatef(1.0f, 2.0f, 0.0f);
-		gluLookAt(      x, 1.0f, z,
+		gluLookAt(  x, 1.0f, z,
                     x+lx, 1.0f,  z+lz,
                     0.0f, 1.0f,  0.0f);
 
@@ -130,26 +158,20 @@ void renderScene(void)
 
 	else //Render game
 	{
-		gluLookAt(  x, 1.0f, z,
-                    x+lx, 1.0f,  z+lz,
-                    0.0f, 1.0f,  0.0f);
-		glRotatef(vangle, 1.0f, 0.0f, 0.0f);
-		glRotatef(hangle, 0.0f, 1.0f, 0.0f);
+		gluLookAt(objCamera.mPos.x,  objCamera.mPos.y,  objCamera.mPos.z,	
+			  objCamera.mView.x, objCamera.mView.y, objCamera.mView.z,	
+			  objCamera.mUp.x,   objCamera.mUp.y,   objCamera.mUp.z);	
 
-		glBindTexture( GL_TEXTURE_2D, floorTexture );
+		glPushMatrix();
 
-		glBegin( GL_QUADS );
-	
-		glVertex3f(-100, 0, -200.0);
-		glTexCoord2f(0, 0);
-		glVertex3f(100, 0, -200.0);
-		glTexCoord2f(0, 1);
-		glVertex3f(100.0, 0, 200.0);
-		glTexCoord2f(1, 1);
-		glVertex3f(-100.0, 0, 200.0);
-		glTexCoord2f(1, 0);
+		glTranslatef(objCamera.mView.x,0.0f,objCamera.mView.z);
+		Draw_Character();
+		glPopMatrix();
 
-		glEnd();
+		glPushMatrix();
+		Draw_Grid(); //testing only
+		Draw_World();
+		glPopMatrix();
 	}
 
 	glutSwapBuffers();
@@ -157,7 +179,6 @@ void renderScene(void)
 
 void changeSize(int w, int h) 
 {
-
         // Prevent a divide by zero, when window is too short
         // (you cant make a window of zero width).
         if(h == 0)
@@ -204,33 +225,41 @@ void processSpecialKeys(int key, int xx, int yy)
 		{
 			switch (key) {
 					case GLUT_KEY_LEFT :
-							//hangle -= 0.5f;
-							lx = sin(hangle);
-							lz = -cos(hangle);
+							objCamera.Strafe_Camera(-CAMERASPEED);
 							break;
 					case GLUT_KEY_RIGHT :
-							//hangle += 0.5f;
-							lx = sin(hangle);
-							lz = -cos(hangle);
+							objCamera.Strafe_Camera(CAMERASPEED);
 							break;
 					case GLUT_KEY_UP :
-							//vangle -= 0.5f;
-							x += lx * fraction;
-							z += lz * fraction;
+							objCamera.Move_Camera(CAMERASPEED);	
 							break;
 					case GLUT_KEY_DOWN :
-							//vangle += 0.5f;
-					        x -= lx * fraction;
-							z -= lz * fraction;
+							objCamera.Move_Camera(-CAMERASPEED);	
 							break;
 			}
         }
 }
 
+void Draw_Grid()
+{																	
+
+	for(float i = -500; i <= 500; i += 5)
+	{
+		glBegin(GL_LINES);
+			glColor3ub(150, 190, 150);							
+			glVertex3f(-500, 0, i);									
+			glVertex3f(500, 0, i);
+
+			glVertex3f(i, 0, -500);								
+			glVertex3f(i, 0, 500);
+		glEnd();
+	}
+}
+
 int main(int argc, char **argv) 
 {
+		objCamera.Position_Camera(0, 1.5f, 4.0f,	0, 1.5f, 0,   0, 1.0f, 0);
 
-        // init GLUT and create window
         glutInit(&argc, argv);
         glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
         glutInitWindowPosition(0,0);
@@ -242,7 +271,7 @@ int main(int argc, char **argv)
         glutDisplayFunc(renderScene);
         glutReshapeFunc(changeSize);
         glutIdleFunc(renderScene);
-        // OpenGL init
+
         glEnable(GL_DEPTH_TEST);
 
 		glEnable(GL_FOG);
@@ -252,7 +281,6 @@ int main(int argc, char **argv)
 		glHint(GL_FOG_HINT, GL_NICEST);
 
         glutKeyboardFunc(processNormalKeys);
-        glutSpecialFunc(processSpecialKeys);
 
         glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
 		glLightfv(GL_LIGHT0, GL_POSITION, light_position);
@@ -262,13 +290,14 @@ int main(int argc, char **argv)
 		glMaterialfv(GL_FRONT, GL_DIFFUSE, dif);
 
         glEnable(GL_COLOR_MATERIAL);
+		glutSetCursor(GLUT_CURSOR_NONE); 
         
         //loading textures
-    	texturizeBackground(2);
+    	texturizeBackground(0);
 		floorTexture  =  loadTexture("background.png");
+		//floorTexture  =  loadTexture("grassTexture.png"); //testing only
 		introTexture  =  loadTexture("Intro.png");
 
-        // enter GLUT event processing cycle
         glutMainLoop();
 
         return 1;

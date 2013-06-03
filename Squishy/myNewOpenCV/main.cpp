@@ -2,7 +2,7 @@
 #include <GL/GL.h>
 #include<opencv\cv.h>
 #include<opencv\highgui.h>
-#include<BlobResult.h>
+//#include<opencv\b>
 #include <windows.h>
 #include "math.h"
 #include "stb_image.h"

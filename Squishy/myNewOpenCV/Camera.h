@@ -1,6 +1,7 @@
-#ifndef _MAIN_H
-#define _MAIN_H
+//#ifndef _MAIN_H
+//#define _MAIN_H
 
+#pragma once
 
 #pragma comment(lib, "opengl32.lib")
 #pragma comment(lib, "glu32.lib")
@@ -57,4 +58,4 @@ extern	HINSTANCE	hInstance;			// Holds the instance of the application
 void Keyboard_Input();
 void Draw_Grid();
 
-#endif
+//#endif

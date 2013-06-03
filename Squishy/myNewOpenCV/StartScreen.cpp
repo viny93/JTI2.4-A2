@@ -3,7 +3,7 @@
 #include <GL/GL.h>
 #include<opencv\cv.h>
 #include<opencv\highgui.h>
-#include<BlobResult.h>
+//#include<BlobResult.h>
 #include <windows.h>
 #include "math.h"
 #include "Camera.h"
@@ -29,56 +29,6 @@ GLuint floorTexture;
 GLuint introTexture;
 int gamestate = 1;
 LPCSTR soundToPlay;
-
-StartScreen::StartScreen(int argc, char **argv) 
-{
-		objCamera.Position_Camera(0, 1.5f, 4.0f,	0, 1.5f, 0,   0, 1.0f, 0);
-
-        glutInit(&argc, argv);
-        glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
-        glutInitWindowPosition(0,0);
-        glutInitWindowSize(1920,1080);
-        glutCreateWindow("Squishy!?");
-		glutFullScreen();
-
-        // register callbacks
-        glutDisplayFunc(Render);
-        glutReshapeFunc(changeSize);
-        glutIdleFunc(Render);
-
-        glEnable(GL_DEPTH_TEST);
-
-		glEnable(GL_FOG);
-		glFogfv(GL_FOG_COLOR,FogCol);
-		glFogi(GL_FOG_MODE, GL_EXP2);
-		glFogf(GL_FOG_DENSITY, 0.02f);
-		glHint(GL_FOG_HINT, GL_NICEST);
-
-        glutKeyboardFunc(processNormalKeys);
-
-        glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
-		glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-		glEnable(GL_LIGHT0);
-		glEnable(GL_LIGHTING);
-		glMaterialfv(GL_FRONT, GL_AMBIENT, amb);
-		glMaterialfv(GL_FRONT, GL_DIFFUSE, dif);
-
-        glEnable(GL_COLOR_MATERIAL);
-		glutSetCursor(GLUT_CURSOR_NONE); 
-        
-        //loading textures
-    	texturizeBackground(0);
-		floorTexture  =  loadTexture("background.png");
-		//floorTexture  =  loadTexture("grassTexture.png"); //testing only
-		introTexture  =  loadTexture("Intro.png");
-
-        glutMainLoop();
-}
-
-StartScreen::~StartScreen(void)
-{
-}
-
 
 void playBackground(void *arg)
 {
@@ -307,3 +257,51 @@ void Draw_Grid()
 	}
 }
 
+StartScreen::StartScreen(int argc, char **argv) 
+{
+		objCamera.Position_Camera(0, 1.5f, 4.0f,	0, 1.5f, 0,   0, 1.0f, 0);
+
+        glutInit(&argc, argv);
+        glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
+        glutInitWindowPosition(0,0);
+        glutInitWindowSize(1920,1080);
+        glutCreateWindow("Squishy!?");
+		glutFullScreen();
+
+        // register callbacks
+        glutDisplayFunc(Render);
+        glutReshapeFunc(changeSize);
+        glutIdleFunc(Render);
+
+        glEnable(GL_DEPTH_TEST);
+
+		glEnable(GL_FOG);
+		glFogfv(GL_FOG_COLOR,FogCol);
+		glFogi(GL_FOG_MODE, GL_EXP2);
+		glFogf(GL_FOG_DENSITY, 0.02f);
+		glHint(GL_FOG_HINT, GL_NICEST);
+
+        glutKeyboardFunc(processNormalKeys);
+
+        glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+		glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+		glEnable(GL_LIGHT0);
+		glEnable(GL_LIGHTING);
+		glMaterialfv(GL_FRONT, GL_AMBIENT, amb);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, dif);
+
+        glEnable(GL_COLOR_MATERIAL);
+		glutSetCursor(GLUT_CURSOR_NONE); 
+        
+        //loading textures
+    	texturizeBackground(0);
+		floorTexture  =  loadTexture("background.png");
+		//floorTexture  =  loadTexture("grassTexture.png"); //testing only
+		introTexture  =  loadTexture("Intro.png");
+
+        glutMainLoop();
+}
+
+StartScreen::~StartScreen(void)
+{
+}

@@ -69,11 +69,9 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Pyramid.cpp" />
     <ClCompile Include="RenderObject.cpp" />
     <ClCompile Include="StartScreen.cpp" />
     <ClCompile Include="stb_image.cpp" />
-    <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="blob.h" />
@@ -85,13 +83,11 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ComponentLabeling.h" />
     <ClInclude Include="GameState.h" />
-    <ClInclude Include="Pyramid.h" />
     <ClInclude Include="RenderObject.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="resource1.h" />
     <ClInclude Include="StartScreen.h" />
     <ClInclude Include="stb_image.h" />
-    <ClInclude Include="test.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\background.png" />

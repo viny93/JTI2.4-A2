@@ -1,10 +1,23 @@
-﻿Build started 17-5-2013 09:53:50.
-     1>Project "C:\Users\Vincent\Downloads\myNewOpenCV\myNewOpenCV\myNewOpenCV.vcxproj" on node 2 (Build target(s)).
-     1>Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Vincent\Downloads\myNewOpenCV\Debug\Squishy.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files\opencv\build\x86\vc10\lib" opencv_core245d.lib opencv_calib3d245d.lib opencv_contrib245d.lib opencv_features2d245d.lib opencv_flann245d.lib opencv_gpu245d.lib opencv_highgui245d.lib opencv_imgproc245d.lib opencv_legacy245d.lib opencv_ml245d.lib opencv_nonfree245d.lib opencv_objdetect245d.lib opencv_photo245d.lib opencv_stitching245d.lib opencv_ts245d.lib opencv_video245d.lib opencv_videostab245d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Vincent\Downloads\myNewOpenCV\Debug\Squishy.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Vincent\Downloads\myNewOpenCV\Debug\Squishy.lib" /MACHINE:X86 Debug\main.obj
-         myNewOpenCV.vcxproj -> C:\Users\Vincent\Downloads\myNewOpenCV\Debug\Squishy.exe
-     1>Done Building Project "C:\Users\Vincent\Downloads\myNewOpenCV\myNewOpenCV\myNewOpenCV.vcxproj" (Build target(s)).
+﻿Build started 3-6-2013 07:52:21.
+     1>Project "C:\Users\Vincent\Documents\GitHub\JTI2.4-A2\Squishy\myNewOpenCV\myNewOpenCV.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\Program Files\opencv\build\include" /I"C:\Program Files\opencv\build\include" /I"C:\Program Files\Common Files\MSVC\freeglut\include" /I"C:\Program Files\opencv\build\include" /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\Camera.cpp ..\test.cpp StartScreen.cpp main.cpp
+         main.cpp
+     1>c:\program files\opencv\build\include\opencv2\flann\logger.h(66): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(218) : see declaration of 'fopen'
+     1>c:\users\vincent\documents\github\jti2.4-a2\squishy\mynewopencv\main.cpp(5): fatal error C1083: Cannot open include file: 'BlobResult.h': No such file or directory
+         StartScreen.cpp
+     1>c:\program files\opencv\build\include\opencv2\flann\logger.h(66): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(218) : see declaration of 'fopen'
+     1>c:\users\vincent\documents\github\jti2.4-a2\squishy\mynewopencv\startscreen.cpp(6): fatal error C1083: Cannot open include file: 'BlobResult.h': No such file or directory
+         test.cpp
+     1>c:\program files\opencv\build\include\opencv2\flann\logger.h(66): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(218) : see declaration of 'fopen'
+     1>c:\users\vincent\documents\github\jti2.4-a2\squishy\test.cpp(5): fatal error C1083: Cannot open include file: 'BlobResult.h': No such file or directory
+         Camera.cpp
+         Generating Code...
+     1>Done Building Project "C:\Users\Vincent\Documents\GitHub\JTI2.4-A2\Squishy\myNewOpenCV\myNewOpenCV.vcxproj" (Build target(s)) -- FAILED.
 
-Build succeeded.
+Build FAILED.
 
-Time Elapsed 00:00:03.04
+Time Elapsed 00:00:07.45

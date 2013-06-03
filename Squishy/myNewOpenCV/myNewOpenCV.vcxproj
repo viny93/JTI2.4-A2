@@ -45,9 +45,11 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(OPENCV_BUILD)\include;%(AdditionalIncludeDirectories);C:\Program Files\Common Files\MSVC\freeglut\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(OPENCV_BUILD)\x86\vc11\lib;%(AdditionalLibraryDirectories); C:\Program Files\Common Files\MSVC\freeglut\include;%(AdditionalIncludeDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -64,7 +66,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Camera.cpp" />
+    <ClCompile Include="..\test.cpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Pyramid.cpp" />
+    <ClCompile Include="RenderObject.cpp" />
+    <ClCompile Include="StartScreen.cpp" />
+    <ClCompile Include="stb_image.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Camera.h" />
+    <ClInclude Include="..\resource.h" />
+    <ClInclude Include="..\resource1.h" />
+    <ClInclude Include="..\stb_image.h" />
+    <ClInclude Include="..\test.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="Pyramid.h" />
+    <ClInclude Include="RenderObject.h" />
+    <ClInclude Include="StartScreen.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\background.png" />
+    <Image Include="..\Intro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Squishy.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -16,6 +16,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Camera.cpp" />
+    <ClCompile Include="..\Enemy.cpp" />
+    <ClCompile Include="..\GameState.cpp" />
     <ClCompile Include="..\main.cpp" />
     <ClCompile Include="..\Player.cpp" />
     <ClCompile Include="..\RenderObject.cpp" />
@@ -23,11 +25,16 @@
     <ClCompile Include="..\World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Enemy.h" />
+    <ClInclude Include="..\GameState.h" />
     <ClInclude Include="..\main.h" />
     <ClInclude Include="..\Player.h" />
     <ClInclude Include="..\RenderObject.h" />
     <ClInclude Include="..\stb_image.h" />
     <ClInclude Include="..\World.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8F6EB3A9-A29F-4C87-9C1F-F4482B1AF8FD}</ProjectGuid>

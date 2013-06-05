@@ -4,18 +4,22 @@
 #include <windows.h>
 #include "main.h"
 
-CCamera objCam; 
+CCamera objCam;
 
 Player::Player(void)
 {
 	objCam.Position_Camera(0, 1.5f, 4.0f,	0, 1.5f, 0,   0, 1.0f, 0);
-}
 
+	//Alter these values to change the bounding box for the player
+	RenderWidth = .3f;
+	RenderDepth = .3f;
+
+	type = PLAYER;
+}
 
 Player::~Player(void)
 {
 }
-
 
 //Functions as a sort of internal renderScene, add all drawing code for this object here
 void Player::Render()
@@ -50,22 +54,24 @@ void Player::Render()
 void Player::Update()
 {
 	objCam.Mouse_Move(500, 500);
+	RenderPositionX = objCam.mView.x;
+	RenderPositionY = objCam.mView.z;
 }
 
 //Using this method you can process normalkeys
 void Player::processNormalKeys(unsigned char key, int x, int y)
 {
 	switch (key) {
-	case 'f' :
+	case 'a' :
 		objCam.Strafe_Camera(-CAMERASPEED);
 		break;
-	case 'h' :
+	case 'd' :
 		objCam.Strafe_Camera(CAMERASPEED);
 		break;
-	case 't' :
+	case 'w' :
 		objCam.Move_Camera(CAMERASPEED);	
 		break;
-	case 'g' :
+	case 's' :
 		objCam.Move_Camera(-CAMERASPEED);	
 		break;
 	case 'z': 

@@ -8,6 +8,7 @@
 #include "main.h"
 #include "Player.h"
 #include "World.h"
+#include "Enemy.h"
 #include "stb_image.h"
 #include <mmsystem.h>
 #include <process.h>     
@@ -97,7 +98,7 @@ void renderScene(void)
 		gluLookAt(  x, 1.0f, z,
 			x+lx, 1.0f,  z+lz,
 			0.0f, 1.0f,  0.0f);
-		startSound("C:/kirby.wav", 100);
+		//startSound("C:/kirby.wav", 100);
 		glTranslatef(1.0f, 2.0f, 0.0f);
 		gluLookAt(  x, 1.0f, z,
 			x+lx, 1.0f,  z+lz,
@@ -136,6 +137,13 @@ void renderScene(void)
 //also deletes objects that are no longer alive (alive = false, can be invoked with Kill())
 void updateAll(void) 
 {	
+	//Extracts player related data
+	RenderObject *_player = renderObjects[0];
+	float PlayerX = _player->RenderPositionX;
+	float PlayerY = _player->RenderPositionY;
+	float PlayerWidth = _player->RenderWidth;
+	float PlayerDepth = _player->RenderDepth;
+	
 	for(int i = 0; i < renderObjects.size(); i++)
 	{
 		renderObjects[i]->Update();
@@ -143,6 +151,27 @@ void updateAll(void)
 		{
 			delete renderObjects[i];
 			renderObjects.erase(renderObjects.begin() + i);	
+		}
+
+		if(renderObjects[i]->type == RenderObject::ENEMY)
+		{
+			float deltaX = (PlayerX - renderObjects[i]->RenderPositionX);
+			if(deltaX < 0)
+				deltaX = -deltaX;
+			float deltaDepth = (PlayerDepth + renderObjects[i]->RenderDepth);
+
+			if(deltaX < deltaDepth)
+			{
+				float deltaY = (PlayerY - renderObjects[i]->RenderPositionY);
+				if(deltaY < 0)
+					deltaY = -deltaY;
+				float deltaWidth = (PlayerWidth + renderObjects[i]->RenderWidth);
+
+				if(deltaY < deltaWidth)
+				{
+					std::cout << "I AM MELTING!" << std::endl;
+				}
+			}
 		}
 	}
 	renderScene();
@@ -192,8 +221,9 @@ void processNormalKeys(unsigned char key, int x, int y)
 
 	int main(int argc, char **argv) 
 	{
-		renderObjects.push_back(new Player());
+		renderObjects.push_back(new Player()); //This one needs to remain first to extract proper data
 		renderObjects.push_back(new World());
+		renderObjects.push_back(new Enemy());
 
 		glutInit(&argc, argv);
 		glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);

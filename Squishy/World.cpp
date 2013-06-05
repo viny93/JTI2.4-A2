@@ -5,6 +5,7 @@
 
 World::World(void)
 {
+	type = WORLD;
 	//floorTexture  =  loadTexture("background.png");
 	//floorTexture  =  loadTexture("grassTexture.png"); //testing only
 }

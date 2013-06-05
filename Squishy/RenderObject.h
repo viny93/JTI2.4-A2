@@ -3,6 +3,21 @@
 class RenderObject
 {
 public:
+	enum ObjectType
+	{
+		WORLD,
+		PLAYER,
+		ENEMY
+	};
+
+	cv::Point RenderCoordinates;
+
+	ObjectType type;
+	float RenderPositionX;
+	float RenderPositionY;
+	float RenderWidth;
+	float RenderDepth;
+
 	RenderObject(void);
 	~RenderObject(void);
 	virtual void Render();

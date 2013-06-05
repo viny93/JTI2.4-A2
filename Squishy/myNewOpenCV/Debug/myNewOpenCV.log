@@ -1,10 +1,15 @@
-﻿Build started 17-5-2013 09:53:50.
-     1>Project "C:\Users\Vincent\Downloads\myNewOpenCV\myNewOpenCV\myNewOpenCV.vcxproj" on node 2 (Build target(s)).
+﻿Build started 5-6-2013 12:08:34.
+     1>Project "C:\Users\Vincent\Documents\GitHub\JTI2.4-A2\Squishy\myNewOpenCV\myNewOpenCV.vcxproj" on node 2 (Build target(s)).
      1>Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Vincent\Downloads\myNewOpenCV\Debug\Squishy.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files\opencv\build\x86\vc10\lib" opencv_core245d.lib opencv_calib3d245d.lib opencv_contrib245d.lib opencv_features2d245d.lib opencv_flann245d.lib opencv_gpu245d.lib opencv_highgui245d.lib opencv_imgproc245d.lib opencv_legacy245d.lib opencv_ml245d.lib opencv_nonfree245d.lib opencv_objdetect245d.lib opencv_photo245d.lib opencv_stitching245d.lib opencv_ts245d.lib opencv_video245d.lib opencv_videostab245d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Vincent\Downloads\myNewOpenCV\Debug\Squishy.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Vincent\Downloads\myNewOpenCV\Debug\Squishy.lib" /MACHINE:X86 Debug\main.obj
-         myNewOpenCV.vcxproj -> C:\Users\Vincent\Downloads\myNewOpenCV\Debug\Squishy.exe
-     1>Done Building Project "C:\Users\Vincent\Downloads\myNewOpenCV\myNewOpenCV\myNewOpenCV.vcxproj" (Build target(s)).
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Vincent\Documents\GitHub\JTI2.4-A2\Squishy\Debug\Squishy.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files\opencv\build\x86\vc10\lib" /LIBPATH:"C:\Program Files\opencv\build\x86\vc11\lib" /LIBPATH:"C:\Users\Vincent\Documents\GitHub\JTI2.4-A2\Squishy\\freeglut\lib" /LIBPATH:"C:\Users\Vincent\Documents\GitHub\JTI2.4-A2\Squishy\\cvblobslib" opencv_core245d.lib opencv_calib3d245d.lib opencv_contrib245d.lib opencv_features2d245d.lib opencv_flann245d.lib opencv_gpu245d.lib opencv_highgui245d.lib opencv_imgproc245d.lib opencv_legacy245d.lib opencv_ml245d.lib opencv_nonfree245d.lib opencv_objdetect245d.lib opencv_photo245d.lib opencv_stitching245d.lib opencv_ts245d.lib opencv_video245d.lib opencv_videostab245d.lib cvblobslib.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Vincent\Documents\GitHub\JTI2.4-A2\Squishy\Debug\Squishy.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Vincent\Documents\GitHub\JTI2.4-A2\Squishy\Debug\Squishy.lib" /MACHINE:X86 Debug\Camera.obj
+         Debug\main.obj
+         Debug\Player.obj
+         Debug\RenderObject.obj
+         Debug\stb_image.obj
+         Debug\World.obj
+         myNewOpenCV.vcxproj -> C:\Users\Vincent\Documents\GitHub\JTI2.4-A2\Squishy\Debug\Squishy.exe
+     1>Done Building Project "C:\Users\Vincent\Documents\GitHub\JTI2.4-A2\Squishy\myNewOpenCV\myNewOpenCV.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:03.04
+Time Elapsed 00:00:00.63

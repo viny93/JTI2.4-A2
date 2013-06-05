@@ -10,6 +10,25 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\grassTexture.png" />
+    <Image Include="..\Intro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Camera.cpp" />
+    <ClCompile Include="..\main.cpp" />
+    <ClCompile Include="..\Player.cpp" />
+    <ClCompile Include="..\RenderObject.cpp" />
+    <ClCompile Include="..\stb_image.cpp" />
+    <ClCompile Include="..\World.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\main.h" />
+    <ClInclude Include="..\Player.h" />
+    <ClInclude Include="..\RenderObject.h" />
+    <ClInclude Include="..\stb_image.h" />
+    <ClInclude Include="..\World.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8F6EB3A9-A29F-4C87-9C1F-F4482B1AF8FD}</ProjectGuid>
     <RootNamespace>myNewOpenCV</RootNamespace>
@@ -45,9 +64,11 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(OPENCV_BUILD)\include;$(SolutionDir)\freeglut\include;$(SolutionDir)\\cvblobslib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(OPENCV_BUILD)\x86\vc10\lib;%(AdditionalLibraryDirectories);$(SolutionDir)\freeglut\lib;$(SolutionDir)\cvblobslib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -63,9 +84,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

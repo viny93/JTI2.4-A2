@@ -4,7 +4,6 @@
 #include "math.h"
 #include "stb_image.h"
 
-
 //Author: Zack
 //RenderObject is he base for all renderobjects
 RenderObject::RenderObject(void)
@@ -12,7 +11,6 @@ RenderObject::RenderObject(void)
 	//alive is true so the object is drawn
 	alive = true;
 }
-
 
 RenderObject::~RenderObject(void)
 {

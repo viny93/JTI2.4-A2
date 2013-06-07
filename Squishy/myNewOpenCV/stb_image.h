@@ -7,6 +7,7 @@
 //    - no 1-bit BMP
 //    - GIF always returns *comp=4
 //
+
 // Basic usage (see HDR discussion below):
 //    int x,y,n;
 //    unsigned char *data = stbi_load(filename, &x, &y, &n, 0);
@@ -113,7 +114,7 @@
 // The three functions you must define are "read" (reads some bytes of data),
 // "skip" (skips some bytes of data), "eof" (reports if the stream is at the end).
 
-
+#define STBI_HEADER_FILE_ONLY
 #ifndef STBI_NO_STDIO
 
 #if defined(_MSC_VER) && _MSC_VER >= 0x1400

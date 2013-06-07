@@ -98,7 +98,7 @@ void renderScene(void)
 	{
 		for(int i = 0; i < renderObjects.size(); i++)
 		{
-			//renderObjects[i]->Render();
+			renderObjects[i]->Render();
 		}
 	}
 

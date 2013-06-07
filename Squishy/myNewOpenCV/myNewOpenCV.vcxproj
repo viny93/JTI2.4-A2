@@ -19,6 +19,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Camera.cpp" />
+    <ClCompile Include="..\Enemy.cpp" />
     <ClCompile Include="..\GameState.cpp" />
     <ClCompile Include="..\main.cpp" />
     <ClCompile Include="..\ObjModel.cpp" />
@@ -29,6 +30,7 @@
     <ClCompile Include="..\World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Enemy.h" />
     <ClInclude Include="..\GameState.h" />
     <ClInclude Include="..\main.h" />
     <ClInclude Include="..\ObjModel.h" />

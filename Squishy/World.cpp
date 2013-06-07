@@ -3,15 +3,23 @@
 #include <GL/GL.h>
 #include "main.h"
 
-World::World(void)
-{
-	type = WORLD;
-	//floorTexture  =  loadTexture("background.png");
-	//floorTexture  =  loadTexture("grassTexture.png"); //testing only
-}
 CCamera world; 
 GLuint floorTexture;
 GLuint blendingTexture;
+
+World::World(void)
+{
+	type = WORLD;
+	floorTexture = world.loadTexture("background.png");
+	blendingTexture = world.loadTexture("caustics.jpg");
+	//floorTexture  =  loadTexture("background.png");
+	//floorTexture  =  loadTexture("grassTexture.png"); //testing only
+}
+
+World::~World(void)
+{
+	
+}
 
 void createFloor()
 {
@@ -45,17 +53,6 @@ void createCausticFloor()
 	glVertex3f(-30, 0.1, 60);
 
 	glEnd();
-}
-
-World::World(void)
-{
-	floorTexture = world.loadTexture("background.png");
-	blendingTexture = world.loadTexture("caustics.jpg");
-}
-
-World::~World(void)
-{
-	
 }
 
 //Functions as a sort of internal renderScene, add all drawing code for this object here

@@ -5,19 +5,9 @@
 
 CCamera world; 
 GLuint floorTexture;
+GLuint blendingTexture;
 
-World::World(void)
-{
-	floorTexture = world.loadTexture("background.png");
-}
-
-World::~World(void)
-{
-	
-}
-
-//Functions as a sort of internal renderScene, add all drawing code for this object here
-void World::Render()
+void createFloor()
 {
 	glBindTexture(GL_TEXTURE_2D, floorTexture);
 	glBegin( GL_QUADS );
@@ -30,6 +20,42 @@ void World::Render()
 	glVertex3f(30, 0, 60);
 	glTexCoord2f(1, 0);
 	glVertex3f(-30, 0, 60);
+
+	glEnd();
+}
+
+void createCausticFloor()
+{
+	glBindTexture(GL_TEXTURE_2D, blendingTexture);
+	glBegin( GL_QUADS );
+
+	glTexCoord2f(0, 0);
+	glVertex3f(-30, 0.1, -60);
+	glTexCoord2f(0, 1);
+	glVertex3f(30, 0.1, -60);
+	glTexCoord2f(1, 1);
+	glVertex3f(30, 0.1, 60);
+	glTexCoord2f(1, 0);
+	glVertex3f(-30, 0.1, 60);
+
+	glEnd();
+}
+
+World::World(void)
+{
+	floorTexture = world.loadTexture("background.png");
+	blendingTexture = world.loadTexture("caustics.jpg");
+}
+
+World::~World(void)
+{
+	
+}
+
+//Functions as a sort of internal renderScene, add all drawing code for this object here
+void World::Render()
+{
+	createFloor();
 
 	glEnd();
 }

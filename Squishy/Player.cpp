@@ -14,7 +14,7 @@ GLuint SKYUP;
 GLuint SKYDOWN;
 float skybox = 0.0f;
 bool moveBox;
-ObjModel* squishy = new ObjModel("squishy1.obj");
+ObjModel* squishy = new ObjModel("Squishy3.obj");
 
 Player::Player(void)
 {

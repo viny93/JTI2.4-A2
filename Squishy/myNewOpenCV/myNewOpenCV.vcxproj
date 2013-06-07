@@ -25,6 +25,7 @@
     <ClCompile Include="..\Player.cpp" />
     <ClCompile Include="..\RenderObject.cpp" />
     <ClCompile Include="..\stb_image.cpp" />
+    <ClCompile Include="..\TGALoader.cpp" />
     <ClCompile Include="..\World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -36,7 +37,14 @@
     <ClInclude Include="..\resource.h" />
     <ClInclude Include="..\resource1.h" />
     <ClInclude Include="..\stb_image.h" />
+    <ClInclude Include="..\Texture.h" />
+    <ClInclude Include="..\TGALoader.h" />
     <ClInclude Include="..\World.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Squishy3.obj">
+      <FileType>Document</FileType>
+    </None>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8F6EB3A9-A29F-4C87-9C1F-F4482B1AF8FD}</ProjectGuid>

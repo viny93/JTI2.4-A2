@@ -134,6 +134,10 @@ ObjModel::ObjModel(std::string fileName)
         }
                 else if(params[0] == "usemtl")
                 {
+					string name = "";
+					if(params.size() > 1)
+						name = params[1];
+
                         if(currentGroup->faces.size() != 0)
                                 groups.push_back(currentGroup);
                         currentGroup = new ObjGroup();
@@ -142,14 +146,14 @@ ObjModel::ObjModel(std::string fileName)
                         for(size_t i = 0; i < materials.size(); i++)
                         {
                                 MaterialInfo* info = materials[i];
-                                if(info->name == params[1])
+                                if(info->name == name)
                                 {
                                         currentGroup->materialIndex = i;
                                         break;
                                 }
                         }
                         if(currentGroup->materialIndex == -1)
-                                std::cout<<"Could not find material name "<<params[1]<<std::endl;
+                                std::cout<<"Could not find material name "<<name<<std::endl;
                 }
         }
         groups.push_back(currentGroup);

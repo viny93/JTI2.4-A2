@@ -19,7 +19,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Camera.cpp" />
-    <ClCompile Include="..\Enemy.cpp" />
     <ClCompile Include="..\GameState.cpp" />
     <ClCompile Include="..\main.cpp" />
     <ClCompile Include="..\ObjModel.cpp" />
@@ -30,16 +29,22 @@
     <ClCompile Include="..\World.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Enemy.h" />
     <ClInclude Include="..\GameState.h" />
     <ClInclude Include="..\main.h" />
     <ClInclude Include="..\ObjModel.h" />
     <ClInclude Include="..\Player.h" />
     <ClInclude Include="..\RenderObject.h" />
+    <ClInclude Include="..\resource.h" />
+    <ClInclude Include="..\resource1.h" />
     <ClInclude Include="..\stb_image.h" />
     <ClInclude Include="..\Texture.h" />
     <ClInclude Include="..\TGALoader.h" />
     <ClInclude Include="..\World.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Squishy3.obj">
+      <FileType>Document</FileType>
+    </None>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8F6EB3A9-A29F-4C87-9C1F-F4482B1AF8FD}</ProjectGuid>

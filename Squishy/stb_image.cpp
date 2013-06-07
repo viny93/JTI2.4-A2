@@ -6,7 +6,6 @@
       Primarily of interest to game developers and other people who can
           avoid problematic images and only need the trivial interface
 
-
       JPEG baseline (no JPEG progressive)
       PNG 8-bit-per-channel only
 

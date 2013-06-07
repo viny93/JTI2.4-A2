@@ -50,9 +50,6 @@
     <ClCompile Include="..\World.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Enemy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\GameState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -79,20 +76,26 @@
     <ClInclude Include="..\World.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Enemy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\GameState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\ObjModel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\TGALoader.h">
+    <ClInclude Include="..\resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\resource1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\TGALoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Squishy3.obj" />
   </ItemGroup>
 </Project>

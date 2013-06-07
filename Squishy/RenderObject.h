@@ -10,7 +10,7 @@ public:
 		ENEMY
 	};
 
-	cv::Point RenderCoordinates;
+//	cv::Point RenderCoordinates;
 
 	ObjectType type;
 	float RenderPositionX;

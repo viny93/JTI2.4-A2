@@ -33,9 +33,6 @@
     <ClInclude Include="..\stb_image.h" />
     <ClInclude Include="..\World.h" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8F6EB3A9-A29F-4C87-9C1F-F4482B1AF8FD}</ProjectGuid>
     <RootNamespace>myNewOpenCV</RootNamespace>

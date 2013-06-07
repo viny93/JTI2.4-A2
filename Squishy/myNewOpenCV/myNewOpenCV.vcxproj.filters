@@ -15,29 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\grassTexture.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\Intro.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\background.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\caustics.jpg">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\JellyfishSea.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\jellyfishTexture.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\squishyTexture.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="..\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -112,8 +89,5 @@
     <ClInclude Include="..\JellyFish.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\Squishy3.obj" />
   </ItemGroup>
 </Project>

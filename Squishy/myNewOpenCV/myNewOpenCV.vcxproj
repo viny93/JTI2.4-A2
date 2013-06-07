@@ -11,15 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\background.png" />
-    <Image Include="..\caustics.jpg" />
-    <Image Include="..\grassTexture.png" />
-    <Image Include="..\Intro.png" />
-    <Image Include="..\JellyfishSea.png" />
-    <Image Include="..\jellyfishTexture.png" />
-    <Image Include="..\squishyTexture.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="..\Camera.cpp" />
     <ClCompile Include="..\Enemy.cpp" />
     <ClCompile Include="..\GameState.cpp" />
@@ -46,11 +37,6 @@
     <ClInclude Include="..\Texture.h" />
     <ClInclude Include="..\TGALoader.h" />
     <ClInclude Include="..\World.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\Squishy3.obj">
-      <FileType>Document</FileType>
-    </None>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8F6EB3A9-A29F-4C87-9C1F-F4482B1AF8FD}</ProjectGuid>

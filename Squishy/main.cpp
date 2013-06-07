@@ -8,7 +8,6 @@
 #include "main.h"
 #include "Player.h"
 #include "World.h"
-#include "Enemy.h"
 #include "stb_image.h"
 #include <mmsystem.h>
 #include <process.h>     
@@ -19,7 +18,7 @@ float x=0.0f,z=2.5f;
 
 //light variables
 float light_diffuse[] = {1.0, 1.0, 1.0, 1.0}; 
-GLfloat light_position[]= { 0.0f, 0.0f, 100.0f, 100.0f };
+GLfloat light_position[] = { 0, 10, 0, 1.0 };
 static float amb[] =  {0.4, 0.4, 0.4, 0.0};
 static float dif[] =  {1.0, 1.0, 1.0, 0.0};
 
@@ -27,10 +26,10 @@ float FogCol[3]={0.0f,0.0f,0.0f};
  
 static std::vector<RenderObject*> renderObjects;
 
-GLuint floorTexture;
 GLuint introTexture;
 int gamestate = 1;
 LPCSTR soundToPlay;
+CCamera tl;
 
 void playBackground(void *arg)
 {
@@ -51,7 +50,7 @@ cv::Mat texturizeBackground(int cam)
 	cv::Size size(1024, 512);
 
 	cap >> save_img;
-	cv::resize(save_img, biggerImage, size, 0, 0,1);
+	cv::resize(save_img, biggerImage, size, 0, 0, 1);
 
 	if(biggerImage.empty())
 	{
@@ -60,31 +59,6 @@ cv::Mat texturizeBackground(int cam)
 	imwrite("background.png", biggerImage); 
 
 	return biggerImage;
-}
-
-GLuint loadTexture(char *filename)
-{
-	int x, y, depth;
-	unsigned char *data = stbi_load(filename, &x, &y, &depth, 4);
-
-	GLuint textureId;
-	// allocate a texture name
-	glGenTextures( 1, &textureId );
-
-	glBindTexture(GL_TEXTURE_2D, textureId);
-
-	glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
-	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-
-	// the texture wraps over at the edges (repeat)
-	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
-	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
-
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, x,y, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-	stbi_image_free(data);
-
-	return textureId;
 }
 
 void renderScene(void) 
@@ -98,7 +72,7 @@ void renderScene(void)
 		gluLookAt(  x, 1.0f, z,
 			x+lx, 1.0f,  z+lz,
 			0.0f, 1.0f,  0.0f);
-		//startSound("C:/kirby.wav", 100);
+		startSound("C:/kirby.wav", 100);
 		glTranslatef(1.0f, 2.0f, 0.0f);
 		gluLookAt(  x, 1.0f, z,
 			x+lx, 1.0f,  z+lz,
@@ -118,14 +92,13 @@ void renderScene(void)
 		glVertex2f(-10.0, 5.0);
 
 		glEnd();
-
 	}
 
 	else //Render game
 	{
 		for(int i = 0; i < renderObjects.size(); i++)
 		{
-			renderObjects[i]->Render();
+			//renderObjects[i]->Render();
 		}
 	}
 
@@ -137,13 +110,6 @@ void renderScene(void)
 //also deletes objects that are no longer alive (alive = false, can be invoked with Kill())
 void updateAll(void) 
 {	
-	//Extracts player related data
-	RenderObject *_player = renderObjects[0];
-	float PlayerX = _player->RenderPositionX;
-	float PlayerY = _player->RenderPositionY;
-	float PlayerWidth = _player->RenderWidth;
-	float PlayerDepth = _player->RenderDepth;
-	
 	for(int i = 0; i < renderObjects.size(); i++)
 	{
 		renderObjects[i]->Update();
@@ -151,27 +117,6 @@ void updateAll(void)
 		{
 			delete renderObjects[i];
 			renderObjects.erase(renderObjects.begin() + i);	
-		}
-
-		if(renderObjects[i]->type == RenderObject::ENEMY)
-		{
-			float deltaX = (PlayerX - renderObjects[i]->RenderPositionX);
-			if(deltaX < 0)
-				deltaX = -deltaX;
-			float deltaDepth = (PlayerDepth + renderObjects[i]->RenderDepth);
-
-			if(deltaX < deltaDepth)
-			{
-				float deltaY = (PlayerY - renderObjects[i]->RenderPositionY);
-				if(deltaY < 0)
-					deltaY = -deltaY;
-				float deltaWidth = (PlayerWidth + renderObjects[i]->RenderWidth);
-
-				if(deltaY < deltaWidth)
-				{
-					std::cout << "I AM MELTING!" << std::endl;
-				}
-			}
 		}
 	}
 	renderScene();
@@ -221,10 +166,6 @@ void processNormalKeys(unsigned char key, int x, int y)
 
 	int main(int argc, char **argv) 
 	{
-		renderObjects.push_back(new Player()); //This one needs to remain first to extract proper data
-		renderObjects.push_back(new World());
-		renderObjects.push_back(new Enemy());
-
 		glutInit(&argc, argv);
 		glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 		glutInitWindowPosition(0,0);
@@ -232,7 +173,6 @@ void processNormalKeys(unsigned char key, int x, int y)
 		glutCreateWindow("Squishy!?");
 		glutFullScreen();
 
-		// register callbacks
 		glutDisplayFunc(renderScene);
 		glutReshapeFunc(changeSize);
 		glutIdleFunc(updateAll);
@@ -242,7 +182,7 @@ void processNormalKeys(unsigned char key, int x, int y)
 		glEnable(GL_FOG);
 		glFogfv(GL_FOG_COLOR,FogCol);
 		glFogi(GL_FOG_MODE, GL_EXP2);
-		glFogf(GL_FOG_DENSITY, 0.05f);
+		glFogf(GL_FOG_DENSITY, 0.1f);
 		glHint(GL_FOG_HINT, GL_NICEST);
 
 		glutKeyboardFunc(processNormalKeys);
@@ -256,12 +196,11 @@ void processNormalKeys(unsigned char key, int x, int y)
 
 		glutSetCursor(GLUT_CURSOR_NONE); 
 
-		//loading textures
-		texturizeBackground(0);
-		introTexture  =  loadTexture("Intro.png");
-		//floorTexture  =  loadTexture("background.png");
-		floorTexture  =  loadTexture("grassTexture.png"); //testing only
+		renderObjects.push_back(new Player());
+		renderObjects.push_back(new World());
 
+		//texturizeBackground(2);
+		introTexture  =  tl.loadTexture("Intro.png");
 
 		glutMainLoop();
 	}

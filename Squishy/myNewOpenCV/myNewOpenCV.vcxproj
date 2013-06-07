@@ -11,26 +11,34 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\background.png" />
+    <Image Include="..\caustics.jpg" />
     <Image Include="..\grassTexture.png" />
     <Image Include="..\Intro.png" />
+    <Image Include="..\JellyfishSea.png" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Camera.cpp" />
     <ClCompile Include="..\Enemy.cpp" />
     <ClCompile Include="..\GameState.cpp" />
     <ClCompile Include="..\main.cpp" />
+    <ClCompile Include="..\ObjModel.cpp" />
     <ClCompile Include="..\Player.cpp" />
     <ClCompile Include="..\RenderObject.cpp" />
     <ClCompile Include="..\stb_image.cpp" />
+    <ClCompile Include="..\TGALoader.cpp" />
     <ClCompile Include="..\World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Enemy.h" />
     <ClInclude Include="..\GameState.h" />
     <ClInclude Include="..\main.h" />
+    <ClInclude Include="..\ObjModel.h" />
     <ClInclude Include="..\Player.h" />
     <ClInclude Include="..\RenderObject.h" />
     <ClInclude Include="..\stb_image.h" />
+    <ClInclude Include="..\Texture.h" />
+    <ClInclude Include="..\TGALoader.h" />
     <ClInclude Include="..\World.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

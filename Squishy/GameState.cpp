@@ -10,7 +10,7 @@ GameState::GameState(void)
 {
 	lives = 3;
 	points = 0;
-	lifeTexture  =  loadTexture("Squishy.png");
+	//lifeTexture  =  loadTexture("Squishy.png");
 }
 
 

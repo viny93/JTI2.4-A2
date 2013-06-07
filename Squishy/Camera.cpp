@@ -1,4 +1,5 @@
-#include "main.h"
+#include "main.h"  
+#include "stb_image.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 //										THE CCAMERA POSITION CAMERA
@@ -95,4 +96,26 @@ void CCamera::Mouse_Move( int wndWidth, int wndHeight )
 	if(mView.y < 0.4f)		mView.y = 0.4f;
 	
 	Rotate_Position(-angle_y);
+}
+
+GLuint CCamera::loadTexture(char *filename)
+{
+	int x, y, depth;
+	unsigned char *data = stbi_load(filename, &x, &y, &depth, 4);
+
+	GLuint textureId;
+	glGenTextures( 1, &textureId );
+
+	glBindTexture(GL_TEXTURE_2D, textureId);
+
+	glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
+	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, x,y, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+	stbi_image_free(data);
+
+	return textureId;
 }

@@ -7,7 +7,6 @@
 //    - no 1-bit BMP
 //    - GIF always returns *comp=4
 //
-
 // Basic usage (see HDR discussion below):
 //    int x,y,n;
 //    unsigned char *data = stbi_load(filename, &x, &y, &n, 0);

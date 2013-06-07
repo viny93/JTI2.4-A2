@@ -3,30 +3,33 @@
 #include <GL/GL.h>
 #include "main.h"
 
+CCamera world; 
+GLuint floorTexture;
+
 World::World(void)
 {
-	//floorTexture  =  loadTexture("background.png");
-	//floorTexture  =  loadTexture("grassTexture.png"); //testing only
+	floorTexture = world.loadTexture("background.png");
 }
 
 World::~World(void)
 {
+	
 }
 
 //Functions as a sort of internal renderScene, add all drawing code for this object here
 void World::Render()
 {
-	//glBindTexture(GL_TEXTURE_2D, floorTexture);
+	glBindTexture(GL_TEXTURE_2D, floorTexture);
 	glBegin( GL_QUADS );
 
 	glTexCoord2f(0, 0);
-	glVertex3f(-100, 0, -200.0);
+	glVertex3f(-30, 0, -60);
 	glTexCoord2f(0, 1);
-	glVertex3f(100, 0, -200.0);
+	glVertex3f(30, 0, -60);
 	glTexCoord2f(1, 1);
-	glVertex3f(100.0, 0, 200.0);
+	glVertex3f(30, 0, 60);
 	glTexCoord2f(1, 0);
-	glVertex3f(-100.0, 0, 200.0);
+	glVertex3f(-30, 0, 60);
 
 	glEnd();
 }
@@ -48,3 +51,4 @@ void World::processSpecialKeys(int key, int xx, int yy)
 {
 
 }
+

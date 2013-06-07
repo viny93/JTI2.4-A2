@@ -1,7 +1,6 @@
 #ifndef _MAIN_H
 #define _MAIN_H
 
-
 #pragma comment(lib, "opengl32.lib")
 #pragma comment(lib, "glu32.lib")
 
@@ -10,7 +9,6 @@
 #include <gl\glu.h>						// Header File For The GLU32 Library
 
 #include <math.h>
-
 
 #define CAMERASPEED	0.05f				// The Camera Speed
 
@@ -39,7 +37,6 @@ class CCamera
 		tVector3 mUp;				
 
 		void Strafe_Camera(float speed);
-
 		void Rotate_Position(float speed);
 		void Move_Camera(float speed);
 		void Mouse_Move(int wndWidth, int wndHeight);
@@ -47,6 +44,7 @@ class CCamera
 		void Position_Camera(float pos_x,  float pos_y,  float pos_z,
 							 float view_x, float view_y, float view_z,
 							 float up_x,   float up_y,   float up_z);
+		GLuint loadTexture(char *filename);
 };
 
 extern	HDC			hDC;				// Device context

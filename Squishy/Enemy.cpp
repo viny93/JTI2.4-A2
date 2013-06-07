@@ -10,6 +10,12 @@ Enemy::Enemy()
 	RenderPositionY = 2.0f;
 	RenderWidth = 1.0f;
 	RenderDepth = 1.0f;
+	
+	_movementX = 0.0f;
+	_movementY = 60.0f;
+	_variationX = 2.1f;
+	_variationY = 0.0f;
+	_count = 0; //Remove when using VSync
 }
 
 Enemy::~Enemy(void)
@@ -42,7 +48,36 @@ void Enemy::Render()
 //Derived classes all have this class, it functions as the method that allows you to implement logic
 void Enemy::Update()
 {
+	//Remove if using VSync from here till....
+	_count = (_count + 1) % 10;
+	if(!_count == 10)
+		return;
+	//...here
 
+
+	if(_variationX < 0)
+	{
+		_movementX++;
+	}
+	else
+	{
+		_movementX--;
+	}
+
+	if(_variationY < 0)
+	{
+		_movementY++;
+	}
+	else
+	{
+		_movementY--;
+	}
+
+	_variationX += _movementX / 1000;
+	_variationY += _movementY / 1000;
+
+	RenderPositionX += _variationX;
+	RenderPositionY += _variationY;
 }
 
 //Using this method you can process normalkeys

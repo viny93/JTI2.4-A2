@@ -76,8 +76,8 @@ void Enemy::Update()
 	_variationX += _movementX / 1000;
 	_variationY += _movementY / 1000;
 
-	RenderPositionX += _variationX;
-	RenderPositionY += _variationY;
+	RenderPositionX += _movementX / 1000;
+	RenderPositionY += _movementY / 1000;
 }
 
 //Using this method you can process normalkeys

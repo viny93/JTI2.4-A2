@@ -202,16 +202,5 @@ void processNormalKeys(unsigned char key, int x, int y)
 		//texturizeBackground(2);
 		introTexture  =  tl.loadTexture("Intro.png");
 
-		GLfloat sPlane[4] = { 0.05, 0.03, 0.0, 0.0 };
-		GLfloat tPlane[4] = { 0.0, 0.03, 0.05, 0.0 };
-
-		glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR);
-		glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR);
-		glTexGenfv(GL_S, GL_OBJECT_PLANE, sPlane);
-		glTexGenfv(GL_T, GL_OBJECT_PLANE, tPlane);
-		glEnable(GL_TEXTURE_GEN_S);
-		glEnable(GL_TEXTURE_GEN_T);
-		glEnable(GL_TEXTURE_2D);
-
 		glutMainLoop();
 	}

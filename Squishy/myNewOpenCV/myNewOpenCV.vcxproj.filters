@@ -30,6 +30,12 @@
     <Image Include="..\JellyfishSea.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="..\jellyfishTexture.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\squishyTexture.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Camera.cpp">
@@ -60,6 +66,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\TGALoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\JellyFish.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -98,6 +107,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\TGALoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\JellyFish.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -14,7 +14,8 @@ GLuint SKYUP;
 GLuint SKYDOWN;
 float skybox = 0.0f;
 bool moveBox;
-ObjModel* squishy = new ObjModel("Squishy3.obj");
+ObjModel* squishy = new ObjModel("squishy1.obj");
+GLuint squishyTexture;
 
 Player::Player(void)
 {
@@ -24,6 +25,7 @@ Player::Player(void)
 	SKYBACK = SKYFRONT;
 	SKYLEFT = SKYFRONT;
 	SKYRIGHT = SKYFRONT;
+	squishyTexture = objCam.loadTexture("squishyTexture.png");
 }
 
 Player::~Player(void)
@@ -100,13 +102,14 @@ void Player::Render()
 			  objCam.mUp.x,   objCam.mUp.y,   objCam.mUp.z);	
 
 	glPushMatrix();
-	glTranslatef(objCam.mView.x,1.2f,objCam.mView.z);
+	glTranslatef(objCam.mView.x,1.4f,objCam.mView.z);
+
 	glScaled(0.3,0.3,0.3);
-	squishy->draw();//*************************************************************************************************************FIX THIS*********************************
+	glBindTexture(GL_TEXTURE_2D, squishyTexture);
+	squishy->draw();
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslated(objCam.mView.x, objCam.mView.y, objCam.mView.z);
 	glTranslated(skybox, 0, skybox);
 	Draw_Skybox(0,0,0,500, 15, 500);	
 	glPopMatrix();
@@ -128,11 +131,11 @@ void Player::Update()
 
 	if(moveBox)
 	{
-		skybox += 0.0008f;
+		skybox += 0.001f;
 	}
 	else
 	{
-		skybox -= 0.0008f;
+		skybox -= 0.001f;
 	}
 }
 

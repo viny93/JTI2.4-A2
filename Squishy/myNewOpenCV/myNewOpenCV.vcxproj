@@ -16,11 +16,14 @@
     <Image Include="..\grassTexture.png" />
     <Image Include="..\Intro.png" />
     <Image Include="..\JellyfishSea.png" />
+    <Image Include="..\jellyfishTexture.png" />
+    <Image Include="..\squishyTexture.png" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Camera.cpp" />
     <ClCompile Include="..\Enemy.cpp" />
     <ClCompile Include="..\GameState.cpp" />
+    <ClCompile Include="..\JellyFish.cpp" />
     <ClCompile Include="..\main.cpp" />
     <ClCompile Include="..\ObjModel.cpp" />
     <ClCompile Include="..\Player.cpp" />
@@ -32,6 +35,7 @@
   <ItemGroup>
     <ClInclude Include="..\Enemy.h" />
     <ClInclude Include="..\GameState.h" />
+    <ClInclude Include="..\JellyFish.h" />
     <ClInclude Include="..\main.h" />
     <ClInclude Include="..\ObjModel.h" />
     <ClInclude Include="..\Player.h" />

@@ -59,6 +59,12 @@ ObjModel::ObjModel(std::string fileName)
 
         std::ifstream pFile(fileName.c_str());
 
+		if(!pFile.is_open())
+		{
+			std::cout<<"Error opening "<<fileName<<std::endl;
+			return;
+		}
+
 
 
         ObjGroup* currentGroup = new ObjGroup();

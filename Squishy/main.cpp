@@ -8,6 +8,7 @@
 #include "main.h"
 #include "Player.h"
 #include "World.h"
+#include "JellyFish.h"
 #include "stb_image.h"
 #include <mmsystem.h>
 #include <process.h>     
@@ -101,7 +102,6 @@ void renderScene(void)
 			renderObjects[i]->Render();
 		}
 	}
-
 	glutSwapBuffers();
 }
 
@@ -198,8 +198,9 @@ void processNormalKeys(unsigned char key, int x, int y)
 
 		renderObjects.push_back(new Player());
 		renderObjects.push_back(new World());
+		renderObjects.push_back(new JellyFish());
 
-		//texturizeBackground(2);
+		texturizeBackground(2);
 		introTexture  =  tl.loadTexture("Intro.png");
 
 		glutMainLoop();

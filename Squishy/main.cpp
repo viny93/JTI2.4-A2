@@ -6,11 +6,9 @@
 #include <windows.h>
 #include "math.h"
 #include "main.h"
-#include "Trap.h"
 #include "Player.h"
 #include "World.h"
 #include "JellyFish.h"
-#include "Detection.h"
 #include "stb_image.h"
 #include <mmsystem.h>
 #include <process.h>     
@@ -25,18 +23,14 @@ GLfloat light_position[] = { 0, 10, 0, 1.0 };
 static float amb[] =  {0.4, 0.4, 0.4, 0.0};
 static float dif[] =  {1.0, 1.0, 1.0, 0.0};
 
-GLuint introTexture;
-
 float FogCol[3]={0.0f,0.0f,0.0f};
  
 static std::vector<RenderObject*> renderObjects;
 
+GLuint introTexture;
 int gamestate = 1;
 LPCSTR soundToPlay;
 CCamera tl;
-
-Detection *detection;
-World* world;
 
 void playBackground(void *arg)
 {
@@ -58,7 +52,6 @@ cv::Mat texturizeBackground(int cam)
 
 	cap >> save_img;
 	cv::resize(save_img, biggerImage, size, 0, 0, 1);
-	cap.release();
 
 	if(biggerImage.empty())
 	{
@@ -202,42 +195,13 @@ void processNormalKeys(unsigned char key, int x, int y)
 		glMaterialfv(GL_FRONT, GL_DIFFUSE, dif);
 
 		glutSetCursor(GLUT_CURSOR_NONE); 
-		
+
 		renderObjects.push_back(new Player());
 		renderObjects.push_back(new World());
 		renderObjects.push_back(new JellyFish());
 
 		texturizeBackground(2);
 		introTexture  =  tl.loadTexture("Intro.png");
-
-				
-		//loading textures
-		//texturizeBackground(0);
-		detection = new Detection();
-		
-		int enemysize = sizeof(detection->detectEnemies());
-		for(int i = 0; i<enemysize; i++)
-		{
-			cv::Point coordinate = detection->detectEnemies()[i];
-			cv::Point worldcoordinate = world->getBottomLeft();
-			//Enemy toevoegen
-		}
-
-		int trapsize = sizeof(detection->detectTraps());
-		for(int i = 0; i<trapsize; i++)
-		{
-			cv::Point coordinate = detection->detectTraps()[i];
-			cv::Point worldcoordinate = world->getBottomLeft();
-			renderObjects.push_back(new Trap(coordinate,worldcoordinate));
-		}
-
-		int startendsize = sizeof(detection->detectStartEnd());
-		for(int i = 0; i<startendsize; i++)
-		{
-			cv::Point coordinate = detection->detectStartEnd()[i];
-			cv::Point worldcoordinate = world->getBottomLeft();
-			//Start/einde toevoegen
-		}
 
 		glutMainLoop();
 	}

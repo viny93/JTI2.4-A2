@@ -12,7 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Camera.cpp" />
-    <ClCompile Include="..\Detection.cpp" />
     <ClCompile Include="..\Enemy.cpp" />
     <ClCompile Include="..\GameState.cpp" />
     <ClCompile Include="..\JellyFish.cpp" />
@@ -22,11 +21,9 @@
     <ClCompile Include="..\RenderObject.cpp" />
     <ClCompile Include="..\stb_image.cpp" />
     <ClCompile Include="..\TGALoader.cpp" />
-    <ClCompile Include="..\Trap.cpp" />
     <ClCompile Include="..\World.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Detection.h" />
     <ClInclude Include="..\Enemy.h" />
     <ClInclude Include="..\GameState.h" />
     <ClInclude Include="..\JellyFish.h" />
@@ -39,7 +36,6 @@
     <ClInclude Include="..\stb_image.h" />
     <ClInclude Include="..\Texture.h" />
     <ClInclude Include="..\TGALoader.h" />
-    <ClInclude Include="..\Trap.h" />
     <ClInclude Include="..\World.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

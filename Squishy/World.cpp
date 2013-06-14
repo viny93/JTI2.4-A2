@@ -1,4 +1,5 @@
 #include "World.h"
+#include <opencv\cv.h>
 #include <GL/glut.h>
 #include <GL/GL.h>
 #include "main.h"
@@ -9,6 +10,8 @@ GLuint blendingTexture;
 
 float caustics = 0.0f;
 bool movecaustics;
+
+cv::Point bottomleft;
 
 void createFloor()
 {
@@ -49,6 +52,9 @@ World::World(void)
 {
 	floorTexture = world.loadTexture("background.png");
 	blendingTexture = world.loadTexture("caustics.jpg");
+	bottomleft.x = 30;
+	bottomleft.y = 30;
+
 }
 
 World::~World(void)
@@ -100,3 +106,7 @@ void World::processSpecialKeys(int key, int xx, int yy)
 
 }
 
+cv::Point World::getBottomLeft()
+{
+	return bottomleft;
+}

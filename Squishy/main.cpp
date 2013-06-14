@@ -10,6 +10,8 @@
 #include "World.h"
 #include "JellyFish.h"
 #include "stb_image.h"
+#include "Detection.h"
+#include "Trap.h"
 #include <mmsystem.h>
 #include <process.h>     
 
@@ -32,6 +34,9 @@ int gamestate = 1;
 LPCSTR soundToPlay;
 CCamera tl;
 
+Detection *detection;
+World* world;
+
 void playBackground(void *arg)
 {
 	PlaySound(soundToPlay, NULL, SND_LOOP);
@@ -52,6 +57,7 @@ cv::Mat texturizeBackground(int cam)
 
 	cap >> save_img;
 	cv::resize(save_img, biggerImage, size, 0, 0, 1);
+	cap.release();
 
 	if(biggerImage.empty())
 	{
@@ -202,6 +208,32 @@ void processNormalKeys(unsigned char key, int x, int y)
 
 		texturizeBackground(2);
 		introTexture  =  tl.loadTexture("Intro.png");
+
+		detection = new Detection();
+		
+		int enemysize = (sizeof(detection->detectEnemies()) / sizeof(cv::Point));
+		for(int i = 0; i<enemysize; i++)
+		{
+			cv::Point coordinate = detection->detectEnemies()[i];
+			cv::Point worldcoordinate = world->getBottomLeft();
+			//Enemy toevoegen
+		}
+
+		int trapsize = (sizeof(detection->detectTraps()) / sizeof(cv::Point));
+		for(int i = 0; i<trapsize; i++)
+		{
+			cv::Point coordinate = detection->detectTraps()[i];
+			cv::Point worldcoordinate = world->getBottomLeft();
+			renderObjects.push_back(new Trap(coordinate,worldcoordinate));
+		}
+
+		int startendsize = (sizeof(detection->detectStartEnd()) / sizeof(cv::Point));
+		for(int i = 0; i<startendsize; i++)
+		{
+			cv::Point coordinate = detection->detectStartEnd()[i];
+			cv::Point worldcoordinate = world->getBottomLeft();
+			//Start/einde toevoegen
+		}
 
 		glutMainLoop();
 	}

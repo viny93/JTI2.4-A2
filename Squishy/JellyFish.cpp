@@ -27,7 +27,7 @@ void JellyFish::Render()
 	glTranslated(0,3.5f,0);
 	glBindTexture(GL_TEXTURE_2D, jellyTexture);
 	glEnable (GL_BLEND);
-	glBlendFunc (GL_ONE, GL_ONE);
+	glBlendFunc (GL_SRC_COLOR, GL_ONE);
 	jellyModel->draw();
 	glDisable(GL_BLEND);
 	glPopMatrix();

@@ -19,13 +19,13 @@ void createFloor()
 	glBegin( GL_QUADS );
 
 	glTexCoord2f(0, 0);
-	glVertex3f(-30, 0, -60);
+	glVertex3f(-bottomleft.x, 0, -bottomleft.y);
 	glTexCoord2f(0, 1);
-	glVertex3f(30, 0, -60);
+	glVertex3f(bottomleft.x, 0, -bottomleft.y);
 	glTexCoord2f(1, 1);
-	glVertex3f(30, 0, 60);
+	glVertex3f(bottomleft.x, 0, bottomleft.y);
 	glTexCoord2f(1, 0);
-	glVertex3f(-30, 0, 60);
+	glVertex3f(-bottomleft.x, 0, bottomleft.y);
 
 	glEnd();
 }
@@ -53,8 +53,7 @@ World::World(void)
 	floorTexture = world.loadTexture("background.png");
 	blendingTexture = world.loadTexture("caustics.jpg");
 	bottomleft.x = 30;
-	bottomleft.y = 30;
-
+	bottomleft.y = 60;
 }
 
 World::~World(void)

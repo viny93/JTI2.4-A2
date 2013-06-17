@@ -9,14 +9,14 @@ VideoCapture cap;
 cv::Mat image;
 CBlobResult blobs, whiteBlobs;
 IplImage blobimage;
-cv::Point enemycoords[10], trapcoords[10],startendcoords[2];
+std::vector<cv::Point> enemycoords, trapcoords,startendcoords;
 
 Detection::Detection()
 {
-	image = cv::imread("background.jpg");	
+	image = cv::imread("background1.jpg");	
 }
 
-cv::Point* Detection::detectEnemies()
+std::vector<cv::Point> Detection::detectEnemies()
 {		
 		cv::Mat hsv,eroded,thresholded,closed;
 
@@ -36,7 +36,7 @@ cv::Point* Detection::detectEnemies()
 		return enemycoords;
 }
 
-cv::Point* Detection::detectTraps()
+std::vector<cv::Point> Detection::detectTraps()
 {
 		cv::Mat hsv,eroded,thresholded,closed;
 
@@ -52,15 +52,11 @@ cv::Point* Detection::detectTraps()
 		
 		blobimage = eroded;
 		storeCoords(blobimage,2);
-		
-		
-		namedWindow("window",1);
-		imshow("window",eroded);
 
 		return trapcoords;
 }
 
-cv::Point* Detection::detectStartEnd()
+std::vector<cv::Point> Detection::detectStartEnd()
 {
 		cv::Mat hsv,eroded,thresholded,closed;
 		
@@ -99,11 +95,11 @@ void Detection::storeCoords(IplImage blobimage,int blobtype)
 		currentcoords.y = (currentBlob->MaxY() + currentBlob->MinY())/2;
 
 		if(blobtype == 1)
-			enemycoords[i] = currentcoords;
+			enemycoords.push_back(currentcoords);
 		if(blobtype == 2)
-			trapcoords[i] = currentcoords;
+			trapcoords.push_back(currentcoords);
 		if(blobtype == 3)
-			startendcoords[i] = currentcoords;
+			startendcoords.push_back(currentcoords);
 	}
 
 }

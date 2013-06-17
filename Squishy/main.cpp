@@ -215,6 +215,7 @@ void processNormalKeys(unsigned char key, int x, int y)
 		introTexture  =  tl.loadTexture("Intro.png");
 
 		detection = new Detection();
+<<<<<<< HEAD
 		
 		int enemysize = (sizeof(detection->detectEnemies()) / sizeof(cv::Point));
 		for(int i = 0; i<enemysize; i++)
@@ -238,6 +239,39 @@ void processNormalKeys(unsigned char key, int x, int y)
 			cv::Point coordinate = detection->detectStartEnd()[i];
 			cv::Point worldcoordinate = world->getBottomLeft();
 			//Start/einde toevoegen
+=======
+		////////////DIT TOEVOEGEN//////////////////////////////////////////////
+		std::vector<cv::Point> enemycoordinates = detection->detectEnemies();		
+		std::vector<cv::Point> trapcoordinates = detection->detectTraps();		
+		std::vector<cv::Point> startendcoordinates = detection->detectStartEnd();
+		cv::Point worldcoordinate = world->getBottomLeft();
+
+		if(enemycoordinates.size() > 0 )
+		{
+			for(int i = 0; i<enemycoordinates.size(); i++)
+			{
+				cv::Point coordinate = enemycoordinates.at(i);
+				renderObjects.push_back(new Enemy(coordinate,worldcoordinate));
+			}
+		}
+
+		if(trapcoordinates.size() > 0 )
+		{
+			for(int i = 0; i<trapcoordinates.size(); i++)
+			{
+				cv::Point coordinate = trapcoordinates.at(i);
+				renderObjects.push_back(new Trap(coordinate,worldcoordinate));
+			}
+		}
+
+		if(startendcoordinates.size() > 0 )
+		{
+			for(int i = 0; i< startendcoordinates.size(); i++)
+			{
+				cv::Point coordinate =  startendcoordinates.at(i);
+				//Start/einde toevoegen
+			}
+>>>>>>> origin/RicardoKKKKKKKKKKKKK
 		}
 
 		glutMainLoop();

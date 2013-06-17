@@ -23,11 +23,8 @@
     <ClCompile Include="..\RenderObject.cpp" />
     <ClCompile Include="..\stb_image.cpp" />
     <ClCompile Include="..\TGALoader.cpp" />
-<<<<<<< HEAD
     <ClCompile Include="..\Trap.cpp" />
-=======
     <ClCompile Include="..\UnderwaterFilter.cpp" />
->>>>>>> origin/vincent
     <ClCompile Include="..\World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -45,12 +42,9 @@
     <ClInclude Include="..\stb_image.h" />
     <ClInclude Include="..\Texture.h" />
     <ClInclude Include="..\TGALoader.h" />
-<<<<<<< HEAD
     <ClInclude Include="..\Trap.h" />
-=======
     <ClInclude Include="..\UnderwaterFilter.h" />
     <ClInclude Include="..\Vec3.h" />
->>>>>>> origin/vincent
     <ClInclude Include="..\World.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

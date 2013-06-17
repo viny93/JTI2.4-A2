@@ -18,16 +18,13 @@ int levelSizeZ = 60;
 float caustics = 0.0f;
 bool movecaustics;
 
-<<<<<<< HEAD
 cv::Point bottomleft;
-=======
 float random_x_array[100];
 float random_z_array[100];
 ObjModel* seaweed = new ObjModel("seaweed.obj");
 
 unsigned char* heightmapData;
 int heightmapWidth, heightmapHeight, heightmapDepth;
->>>>>>> origin/vincent
 
 void createFloor()
 {
@@ -35,7 +32,6 @@ void createFloor()
 	glBegin( GL_QUADS );
 
 	glTexCoord2f(0, 0);
-<<<<<<< HEAD
 	glVertex3f(-bottomleft.x, 0, -bottomleft.y);
 	glTexCoord2f(0, 1);
 	glVertex3f(bottomleft.x, 0, -bottomleft.y);
@@ -43,7 +39,6 @@ void createFloor()
 	glVertex3f(bottomleft.x, 0, bottomleft.y);
 	glTexCoord2f(1, 0);
 	glVertex3f(-bottomleft.x, 0, bottomleft.y);
-=======
 	glVertex3f(-levelSizeZ/2, 0, -levelSizeX/2);
 	glTexCoord2f(0, 1);
 	glVertex3f(levelSizeZ/2, 0, -levelSizeX/2);
@@ -51,7 +46,6 @@ void createFloor()
 	glVertex3f(levelSizeZ/2, 0, levelSizeX/2);
 	glTexCoord2f(1, 0);
 	glVertex3f(-levelSizeZ/2, 0, levelSizeX/2);
->>>>>>> origin/vincent
 
 	glEnd();
 }
@@ -125,10 +119,8 @@ World::World(void)
 	rockTexture = world.loadTexture("rockTexture.jpg");
 	floorTexture = world.loadTexture("background.png");
 	blendingTexture = world.loadTexture("caustics.jpg");
-<<<<<<< HEAD
 	bottomleft.x = 30;
 	bottomleft.y = 60;
-=======
 	
 	for(int i = 0; i < 99; i ++) 
 			{
@@ -136,7 +128,6 @@ World::World(void)
 				random_z_array[i] = (rand() % levelSizeZ);
 	}
 	heightmapData = stbi_load("heightmap.png", &heightmapWidth, &heightmapHeight, &heightmapDepth, 4);
->>>>>>> origin/vincent
 }
 
 World::~World(void)

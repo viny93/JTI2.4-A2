@@ -15,6 +15,7 @@
     <ClCompile Include="..\Detection.cpp" />
     <ClCompile Include="..\Enemy.cpp" />
     <ClCompile Include="..\GameState.cpp" />
+    <ClCompile Include="..\HUD.cpp" />
     <ClCompile Include="..\JellyFish.cpp" />
     <ClCompile Include="..\main.cpp" />
     <ClCompile Include="..\ObjModel.cpp" />
@@ -22,13 +23,18 @@
     <ClCompile Include="..\RenderObject.cpp" />
     <ClCompile Include="..\stb_image.cpp" />
     <ClCompile Include="..\TGALoader.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="..\Trap.cpp" />
+=======
+    <ClCompile Include="..\UnderwaterFilter.cpp" />
+>>>>>>> origin/vincent
     <ClCompile Include="..\World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Detection.h" />
     <ClInclude Include="..\Enemy.h" />
     <ClInclude Include="..\GameState.h" />
+    <ClInclude Include="..\HUD.h" />
     <ClInclude Include="..\JellyFish.h" />
     <ClInclude Include="..\main.h" />
     <ClInclude Include="..\ObjModel.h" />
@@ -39,7 +45,12 @@
     <ClInclude Include="..\stb_image.h" />
     <ClInclude Include="..\Texture.h" />
     <ClInclude Include="..\TGALoader.h" />
+<<<<<<< HEAD
     <ClInclude Include="..\Trap.h" />
+=======
+    <ClInclude Include="..\UnderwaterFilter.h" />
+    <ClInclude Include="..\Vec3.h" />
+>>>>>>> origin/vincent
     <ClInclude Include="..\World.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -78,6 +89,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(OPENCV_BUILD)\include;$(SolutionDir)\freeglut\include;$(SolutionDir)\\cvblobslib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

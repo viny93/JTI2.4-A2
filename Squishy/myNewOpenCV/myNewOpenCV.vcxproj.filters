@@ -48,10 +48,17 @@
     <ClCompile Include="..\JellyFish.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="..\Detection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Trap.cpp">
+=======
+    <ClCompile Include="..\HUD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\UnderwaterFilter.cpp">
+>>>>>>> origin/vincent
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -95,10 +102,20 @@
     <ClInclude Include="..\JellyFish.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="..\Detection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Trap.h">
+=======
+    <ClInclude Include="..\HUD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Vec3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UnderwaterFilter.h">
+>>>>>>> origin/vincent
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

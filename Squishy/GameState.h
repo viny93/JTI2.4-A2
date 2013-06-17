@@ -2,15 +2,17 @@
 #include "RenderObject.h"
 #include "main.h"
 
-class GameState : RenderObject
+static int lives = 3;
+
+class GameState
 {
 public:
 	GameState(void);
 	~GameState(void);
-	void Render();
 	void die();
 	void regen();
 	void addPoint();
 	void addPoints(int);
 	int getPoints();
+	int getLives();
 };

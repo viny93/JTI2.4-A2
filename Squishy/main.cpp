@@ -260,22 +260,31 @@ void processNormalKeys(unsigned char key, int x, int y)
 		std::vector<cv::Point> startendcoordinates = detection->detectStartEnd();
 		cv::Point worldcoordinate = world->getBottomLeft();
 
-		for(int i = 0; i<enemycoordinates.size(); i++)
+		if(enemycoordinates.size() > 0 )
 		{
-			cv::Point coordinate = enemycoordinates.at(i);
-			renderObjects.push_back(new Enemy(coordinate,worldcoordinate));
-		}
-		
-		for(int i = 0; i<trapcoordinates.size(); i++)
-		{
-			cv::Point coordinate = trapcoordinates.at(i);
-			renderObjects.push_back(new Trap(coordinate,worldcoordinate));
+			for(int i = 0; i<enemycoordinates.size(); i++)
+			{
+				cv::Point coordinate = enemycoordinates.at(i);
+				renderObjects.push_back(new Enemy(coordinate,worldcoordinate));
+			}
 		}
 
-		for(int i = 0; i< startendcoordinates.size(); i++)
+		if(trapcoordinates.size() > 0 )
 		{
-			cv::Point coordinate =  startendcoordinates.at(i);
-			//Start/einde toevoegen
+			for(int i = 0; i<trapcoordinates.size(); i++)
+			{
+				cv::Point coordinate = trapcoordinates.at(i);
+				renderObjects.push_back(new Trap(coordinate,worldcoordinate));
+			}
+		}
+
+		if(startendcoordinates.size() > 0 )
+		{
+			for(int i = 0; i< startendcoordinates.size(); i++)
+			{
+				cv::Point coordinate =  startendcoordinates.at(i);
+				//Start/einde toevoegen
+			}
 		}
 		////////////////////EINDE TOEVOEGING////////////////////////////////////
 		glutMainLoop();

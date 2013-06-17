@@ -1,10 +1,11 @@
 #pragma once
+#include<opencv\cv.h>
 #include "renderobject.h"
 
 class Enemy : public RenderObject
 {
 public:
-	Enemy(void);
+	Enemy(cv::Point, cv::Point);
 	~Enemy(void);
 
 	void Render();
@@ -19,5 +20,8 @@ private:
 	float _variationY;
 
 	int _count; //Remove when using VSync
+
+	cv::Point coordinates;
+	cv::Point worldcoordinates;
 };
 

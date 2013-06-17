@@ -12,4 +12,5 @@ public:
 
 private:
 	cv::Point coordinates;
+	cv::Point worldcoordinates;
 };

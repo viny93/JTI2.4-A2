@@ -2,12 +2,18 @@
 #include <GL/glut.h>
 #include <GL/GL.h>
 #include <windows.h>
+#include <opencv\cv.h>
 
-Enemy::Enemy()
+#include <iostream>
+
+Enemy::Enemy(cv::Point coordinates,cv::Point worldcoordinates)
 {
+	this->coordinates = coordinates;
+	this->worldcoordinates = worldcoordinates;
+	
 	type = ENEMY;
-	RenderPositionX = 2.0f;
-	RenderPositionY = 2.0f;
+	RenderPositionX = coordinates.x;
+	RenderPositionY = coordinates.y;
 	RenderWidth = 1.0f;
 	RenderDepth = 1.0f;
 	
@@ -20,13 +26,16 @@ Enemy::Enemy()
 
 Enemy::~Enemy(void)
 {
+
 }
 
 //Functions as a sort of internal renderScene, add all drawing code for this object here
 void Enemy::Render()
 {
 	glPushMatrix();
-	glTranslatef(RenderPositionX, 1.0f, RenderPositionY);
+
+    glTranslatef(RenderPositionY/(512/60) - worldcoordinates.x,1.0f,RenderPositionX/(512/60) - worldcoordinates.y);
+
 	glBegin(GL_TRIANGLES);				
 	glColor3f(1.0f,0.0f,0.0f);				
 	glVertex3f( 0.0f, 1.0f, 0.0f);			
@@ -73,11 +82,11 @@ void Enemy::Update()
 		_movementY--;
 	}
 
-	_variationX += _movementX / 1000;
-	_variationY += _movementY / 1000;
+	_variationX += _movementX / 100;
+	_variationY += _movementY / 100;
 
-	RenderPositionX += _movementX / 1000;
-	RenderPositionY += _movementY / 1000;
+	RenderPositionX += _movementX / 100;
+	RenderPositionY += _movementY / 100;
 }
 
 //Using this method you can process normalkeys

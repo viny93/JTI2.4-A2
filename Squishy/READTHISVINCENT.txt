@@ -1,6 +1,0 @@
-DIT MOET TOEGEVOEGD WORDEN:
-
--DETECTION KLAS
--TRAP KLAS
--ENEMY KLAS
--In main: UpdateAll() en wat staat aangegeven in de mainmethode.

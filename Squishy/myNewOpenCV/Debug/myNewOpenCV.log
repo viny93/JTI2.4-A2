@@ -1,19 +1,29 @@
-﻿Build started 7-6-2013 15:28:47.
+﻿Build started 17-6-2013 15:11:53.
      1>Project "C:\Users\Ricardo\Documents\GitHub\JTI2.4-A2\JTI2.4-A2\Squishy\myNewOpenCV\myNewOpenCV.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         D:\Program Files\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"D:\Program Files\opencv\build\include" /I"D:\Program Files\opencv\build\include" /I"D:\Program Files\freeglut\include" /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Trap.cpp
-         Trap.cpp
-     1>c:\users\ricardo\documents\github\jti2.4-a2\jti2.4-a2\squishy\mynewopencv\trap.cpp(25): warning C4244: 'argument' : conversion from 'int' to 'GLfloat', possible loss of data
+         D:\Program Files\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"D:\Program Files\opencv\build\include" /I"C:\Users\Ricardo\Documents\GitHub\JTI2.4-A2\JTI2.4-A2\Squishy\\freeglut\include" /I"C:\Users\Ricardo\Documents\GitHub\JTI2.4-A2\JTI2.4-A2\Squishy\\\cvblobslib" /I"D:\Program Files\opencv\build\include" /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\main.cpp
+         main.cpp
+     1>c:\users\ricardo\documents\github\jti2.4-a2\jti2.4-a2\squishy\main.cpp(26): warning C4305: 'initializing' : truncation from 'double' to 'float'
+     1>c:\users\ricardo\documents\github\jti2.4-a2\jti2.4-a2\squishy\main.cpp(107): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ricardo\documents\github\jti2.4-a2\jti2.4-a2\squishy\main.cpp(135): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ricardo\documents\github\jti2.4-a2\jti2.4-a2\squishy\main.cpp(179): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\ricardo\documents\github\jti2.4-a2\jti2.4-a2\squishy\main.cpp(202): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ricardo\documents\github\jti2.4-a2\jti2.4-a2\squishy\main.cpp(211): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ricardo\documents\github\jti2.4-a2\jti2.4-a2\squishy\main.cpp(263): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ricardo\documents\github\jti2.4-a2\jti2.4-a2\squishy\main.cpp(269): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ricardo\documents\github\jti2.4-a2\jti2.4-a2\squishy\main.cpp(275): warning C4018: '<' : signed/unsigned mismatch
        Link:
-         D:\Program Files\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Ricardo\Documents\GitHub\JTI2.4-A2\JTI2.4-A2\Squishy\Debug\Squishy.exe" /INCREMENTAL /NOLOGO /LIBPATH:"D:\Program Files\opencv\build\x86\vc11\lib" /LIBPATH:"D:\Program Files\opencv\build\x86\vc11\lib" /LIBPATH:"D:\Program Files\freeglut\lib" opencv_core245d.lib opencv_calib3d245d.lib opencv_contrib245d.lib opencv_features2d245d.lib opencv_flann245d.lib opencv_gpu245d.lib opencv_highgui245d.lib opencv_imgproc245d.lib opencv_legacy245d.lib opencv_ml245d.lib opencv_nonfree245d.lib opencv_objdetect245d.lib opencv_photo245d.lib opencv_stitching245d.lib opencv_ts245d.lib opencv_video245d.lib opencv_videostab245d.lib cvblobslib.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Ricardo\Documents\GitHub\JTI2.4-A2\JTI2.4-A2\Squishy\Debug\Squishy.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Ricardo\Documents\GitHub\JTI2.4-A2\JTI2.4-A2\Squishy\Debug\Squishy.lib" /MACHINE:X86 Debug\Squishy.res
-         Debug\Camera.obj
+         D:\Program Files\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Ricardo\Documents\GitHub\JTI2.4-A2\JTI2.4-A2\Squishy\Debug\Squishy.exe" /INCREMENTAL /NOLOGO /LIBPATH:"D:\Program Files\opencv\build\x86\vc10\lib" /LIBPATH:"D:\Program Files\opencv\build\x86\vc11\lib" /LIBPATH:"C:\Users\Ricardo\Documents\GitHub\JTI2.4-A2\JTI2.4-A2\Squishy\\freeglut\lib" /LIBPATH:"C:\Users\Ricardo\Documents\GitHub\JTI2.4-A2\JTI2.4-A2\Squishy\\cvblobslib" opencv_core245d.lib opencv_calib3d245d.lib opencv_contrib245d.lib opencv_features2d245d.lib opencv_flann245d.lib opencv_gpu245d.lib opencv_highgui245d.lib opencv_imgproc245d.lib opencv_legacy245d.lib opencv_ml245d.lib opencv_nonfree245d.lib opencv_objdetect245d.lib opencv_photo245d.lib opencv_stitching245d.lib opencv_ts245d.lib opencv_video245d.lib opencv_videostab245d.lib cvblobslib.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Ricardo\Documents\GitHub\JTI2.4-A2\JTI2.4-A2\Squishy\Debug\Squishy.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Ricardo\Documents\GitHub\JTI2.4-A2\JTI2.4-A2\Squishy\Debug\Squishy.lib" /MACHINE:X86 Debug\Camera.obj
+         Debug\Detection.obj
+         Debug\Enemy.obj
          Debug\GameState.obj
+         Debug\JellyFish.obj
          Debug\main.obj
+         Debug\ObjModel.obj
          Debug\Player.obj
          Debug\RenderObject.obj
-         Debug\Detection.obj
-         Debug\StartScreen.obj
          Debug\stb_image.obj
+         Debug\TGALoader.obj
          Debug\Trap.obj
          Debug\World.obj
          myNewOpenCV.vcxproj -> C:\Users\Ricardo\Documents\GitHub\JTI2.4-A2\JTI2.4-A2\Squishy\Debug\Squishy.exe
@@ -21,4 +31,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:04.50
+Time Elapsed 00:00:04.45

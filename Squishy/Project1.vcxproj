@@ -70,14 +70,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\Desktop\Vec2.h" />
+    <ClInclude Include="..\..\..\..\..\Desktop\Vec3.h" />
+    <ClInclude Include="ObjModel.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="RenderObject.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="resource1.h" />
     <ClInclude Include="stb_image.h" />
-    <ClInclude Include="test.h" />
+    <ClInclude Include="main.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="TGALoader.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="ObjModel.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RenderObject.cpp" />
     <ClCompile Include="stb_image.cpp" />
-    <ClCompile Include="test.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="TGALoader.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Project1.rc" />

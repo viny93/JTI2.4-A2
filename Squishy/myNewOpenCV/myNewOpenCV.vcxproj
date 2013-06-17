@@ -10,6 +10,38 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Camera.cpp" />
+    <ClCompile Include="..\Detection.cpp" />
+    <ClCompile Include="..\Enemy.cpp" />
+    <ClCompile Include="..\GameState.cpp" />
+    <ClCompile Include="..\JellyFish.cpp" />
+    <ClCompile Include="..\main.cpp" />
+    <ClCompile Include="..\ObjModel.cpp" />
+    <ClCompile Include="..\Player.cpp" />
+    <ClCompile Include="..\RenderObject.cpp" />
+    <ClCompile Include="..\stb_image.cpp" />
+    <ClCompile Include="..\TGALoader.cpp" />
+    <ClCompile Include="..\Trap.cpp" />
+    <ClCompile Include="..\World.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Detection.h" />
+    <ClInclude Include="..\Enemy.h" />
+    <ClInclude Include="..\GameState.h" />
+    <ClInclude Include="..\JellyFish.h" />
+    <ClInclude Include="..\main.h" />
+    <ClInclude Include="..\ObjModel.h" />
+    <ClInclude Include="..\Player.h" />
+    <ClInclude Include="..\RenderObject.h" />
+    <ClInclude Include="..\resource.h" />
+    <ClInclude Include="..\resource1.h" />
+    <ClInclude Include="..\stb_image.h" />
+    <ClInclude Include="..\Texture.h" />
+    <ClInclude Include="..\TGALoader.h" />
+    <ClInclude Include="..\Trap.h" />
+    <ClInclude Include="..\World.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8F6EB3A9-A29F-4C87-9C1F-F4482B1AF8FD}</ProjectGuid>
     <RootNamespace>myNewOpenCV</RootNamespace>
@@ -45,11 +77,11 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(OPENCV_BUILD)\include;%(AdditionalIncludeDirectories);D:\Program Files\freeglut\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(OPENCV_BUILD)\include;$(SolutionDir)\freeglut\include;$(SolutionDir)\\cvblobslib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(OPENCV_BUILD)\x86\vc11\lib;%(AdditionalLibraryDirectories);D:\Program Files\freeglut\lib;%(AdditionalIncludeDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OPENCV_BUILD)\x86\vc10\lib;%(AdditionalLibraryDirectories);$(SolutionDir)\freeglut\lib;$(SolutionDir)\cvblobslib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -65,45 +97,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="GameState.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="RenderObject.cpp" />
-    <ClCompile Include="Detection.cpp" />
-    <ClCompile Include="StartScreen.cpp" />
-    <ClCompile Include="stb_image.cpp" />
-    <ClCompile Include="Trap.cpp" />
-    <ClCompile Include="World.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="blob.h" />
-    <ClInclude Include="BlobContour.h" />
-    <ClInclude Include="BlobLibraryConfiguration.h" />
-    <ClInclude Include="BlobOperators.h" />
-    <ClInclude Include="BlobProperties.h" />
-    <ClInclude Include="BlobResult.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="ComponentLabeling.h" />
-    <ClInclude Include="Detection.h" />
-    <ClInclude Include="GameState.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="RenderObject.h" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="resource1.h" />
-    <ClInclude Include="StartScreen.h" />
-    <ClInclude Include="stb_image.h" />
-    <ClInclude Include="Trap.h" />
-    <ClInclude Include="World.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\background.png" />
-    <Image Include="..\Intro.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Squishy.rc" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

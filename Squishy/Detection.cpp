@@ -1,7 +1,7 @@
 #include"Detection.h"
 #include<opencv\cv.h>
 #include<opencv\highgui.h>
-#include<opencv\BlobResult.h>
+#include "BlobResult.h"
 
 using namespace cv;
 

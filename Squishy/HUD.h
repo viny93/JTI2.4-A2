@@ -1,10 +1,12 @@
 #pragma once
 #include "renderobject.h"
+#include "GameState.h"
+
 class HUD :
 	public RenderObject
 {
 public:
-	HUD(void);
+	HUD(GameState *state);
 	~HUD(void);
 
 	void Render();

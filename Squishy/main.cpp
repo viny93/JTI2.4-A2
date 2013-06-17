@@ -35,6 +35,7 @@ GLuint introTexture;
 int gamestate = 1;
 LPCSTR soundToPlay;
 CCamera tl;
+GameState *state2;
 
 Detection *detection;
 World* world;
@@ -202,13 +203,13 @@ void processNormalKeys(unsigned char key, int x, int y)
 
 		glutSetCursor(GLUT_CURSOR_NONE); 
 
-		renderObjects.push_back(new Player());
+		renderObjects.push_back(new Player(state2));
 		renderObjects.push_back(new World());
 		renderObjects.push_back(new JellyFish());
 		renderObjects.push_back(new UnderwaterFilter());
 		//renderObjects.push_back(new JellyFish());
 
-		renderObjects.push_back(new HUD());
+		renderObjects.push_back(new HUD(state2));
 
 		//texturizeBackground(2);
 		introTexture  =  tl.loadTexture("Intro.png");

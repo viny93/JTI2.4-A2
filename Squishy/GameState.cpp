@@ -3,6 +3,7 @@
 #include <GL/glut.h>
 
 int points;
+int lives = 3;
 //int gamestate;
 GLuint lifeTexture;
 

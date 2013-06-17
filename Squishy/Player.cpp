@@ -4,6 +4,7 @@
 #include <windows.h>
 #include "main.h"
 #include "ObjModel.h"
+#include "GameState.h"
 
 CCamera objCam; 
 GLuint SKYFRONT;
@@ -22,9 +23,12 @@ bool ink = false;
 bool iron = false;
 float inkDis;
 float angle = -90.0f;
+GameState *gamestate;
+int previousLives;
 
-Player::Player(void)
+Player::Player(GameState *state)
 {
+	gamestate = state;
 	objCam.Position_Camera(0, 1.5f, 4.0f,	0, 1.5f, 0,   0, 1.0f, 0);
 	SKYUP = objCam.loadTexture("caustics.jpg");
 	SKYFRONT = objCam.loadTexture("JellyfishSea.png");
@@ -175,6 +179,11 @@ void Player::Update()
 	{
 		skybox -= 0.001f;
 	}
+	if(gamestate->getLives() < previousLives)
+	{
+		objCam.Position_Camera(0, 1.5f, 4.0f,	0, 1.5f, 0,   0, 1.0f, 0);
+	}
+	previousLives = gamestate->getLives();
 }
 
 //Using this method you can process normalkeys
@@ -201,6 +210,9 @@ void Player::processNormalKeys(unsigned char key, int x, int y)
 		break;
 	case 'q' : //shoot
 			ink = true;
+		break;
+		case 32 : //shoot
+					gamestate->die();
 		break;
 	case 'i' : //iron mode
 		if (iron == false)

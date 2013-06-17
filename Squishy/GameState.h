@@ -2,7 +2,7 @@
 #include "RenderObject.h"
 #include "main.h"
 
-static int lives = 3;
+
 
 class GameState
 {

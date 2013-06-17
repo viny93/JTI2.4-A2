@@ -4,14 +4,16 @@
 #include <windows.h>
 #include "main.h"
 #include "ObjModel.h"
-#include "GameState.h"
+
 
 CCamera hudcam; 
 GLuint heartTexture;
 GLuint GameOverScreenTexture;
+GameState *gamestate2;
 
-HUD::HUD(void)
+HUD::HUD(GameState *state)
 {
+	gamestate2 = state;
 	heartTexture = hudcam.loadTexture("heartTexture.png");
 	GameOverScreenTexture = hudcam.loadTexture("GameOverScreen.png");
 	ratio = 1.0* glutGet(GLUT_SCREEN_WIDTH)/ glutGet(GLUT_SCREEN_HEIGHT);
@@ -37,11 +39,11 @@ void HUD::Render()
 	
 
 	//Draw life icons here:
-	if(lives > 0)
+	if(gamestate2->getLives() > 0)
 	{
 		glBindTexture( GL_TEXTURE_2D, heartTexture );
 		glBegin(GL_QUADS);
-		for(int i = 0; i < lives; i++)
+		for(int i = 0; i < gamestate2->getLives(); i++)
 		{
 			DrawLives(i);
 		}
@@ -98,12 +100,12 @@ void HUD::Update()
 //Using this method you can process normalkeys
 void HUD::processNormalKeys(unsigned char key, int x, int y)
 {
-	//removes 1 life icon on the screen
-	switch (key) {
+	////removes 1 life icon on the screen
+	/*switch (key) {
 		case 32 :
 			lives--;
 			break;
-		}
+		}*/
 }
 
 //Using this method you can process specialkeys

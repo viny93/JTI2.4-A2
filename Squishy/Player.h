@@ -1,10 +1,12 @@
 #pragma once
 #include "renderobject.h"
+#include "GameState.h"
+
 class Player :
 	public RenderObject
 {
 public:
-	Player(void);
+	Player(GameState *state);
 	~Player(void);
 
 	void Render();

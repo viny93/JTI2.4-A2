@@ -13,7 +13,7 @@ std::vector<cv::Point> enemycoords, trapcoords,startendcoords;
 
 Detection::Detection()
 {
-	image = cv::imread("background1.jpg");	
+	image = cv::imread("background.png");	
 }
 
 std::vector<cv::Point> Detection::detectEnemies()

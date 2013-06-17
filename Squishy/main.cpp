@@ -17,6 +17,7 @@
 #include <process.h>     
 #include "Screens.h"
 #include "UnderwaterFilter.h"
+#include "Enemy.h"
 
 float red=1.0f, blue=1.0f, green=1.0f;
 float lx=0.0f,lz=-1.0f;
@@ -215,7 +216,6 @@ void processNormalKeys(unsigned char key, int x, int y)
 		introTexture  =  tl.loadTexture("Intro.png");
 
 		detection = new Detection();
-<<<<<<< HEAD
 		
 		int enemysize = (sizeof(detection->detectEnemies()) / sizeof(cv::Point));
 		for(int i = 0; i<enemysize; i++)
@@ -225,21 +225,25 @@ void processNormalKeys(unsigned char key, int x, int y)
 			//Enemy toevoegen
 		}
 
-		int trapsize = (sizeof(detection->detectTraps()) / sizeof(cv::Point));
+		std::vector<cv::Point> points = detection->detectTraps();
+
+		int trapsize = points.size();
 		for(int i = 0; i<trapsize; i++)
 		{
-			cv::Point coordinate = detection->detectTraps()[i];
+			cv::Point coordinate = points[i];
 			cv::Point worldcoordinate = world->getBottomLeft();
 			renderObjects.push_back(new Trap(coordinate,worldcoordinate));
 		}
 
-		int startendsize = (sizeof(detection->detectStartEnd()) / sizeof(cv::Point));
+		points = detection->detectStartEnd();
+		int startendsize = points.size();
 		for(int i = 0; i<startendsize; i++)
 		{
-			cv::Point coordinate = detection->detectStartEnd()[i];
+			cv::Point coordinate = points[i];
 			cv::Point worldcoordinate = world->getBottomLeft();
 			//Start/einde toevoegen
-=======
+		}
+
 		////////////DIT TOEVOEGEN//////////////////////////////////////////////
 		std::vector<cv::Point> enemycoordinates = detection->detectEnemies();		
 		std::vector<cv::Point> trapcoordinates = detection->detectTraps();		
@@ -271,7 +275,6 @@ void processNormalKeys(unsigned char key, int x, int y)
 				cv::Point coordinate =  startendcoordinates.at(i);
 				//Start/einde toevoegen
 			}
->>>>>>> origin/RicardoKKKKKKKKKKKKK
 		}
 
 		glutMainLoop();

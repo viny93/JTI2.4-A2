@@ -35,7 +35,7 @@ void Enemy::Render()
 	glPushMatrix();
 
     glTranslatef(RenderPositionY/(512/60) - worldcoordinates.x,1.0f,RenderPositionX/(512/60) - worldcoordinates.y);
-
+	glPushAttrib(GL_CURRENT_BIT);
 	glBegin(GL_TRIANGLES);				
 	glColor3f(1.0f,0.0f,0.0f);				
 	glVertex3f( 0.0f, 1.0f, 0.0f);			
@@ -51,6 +51,7 @@ void Enemy::Render()
 	glVertex3f(-RenderWidth,-1.0f,-RenderDepth);					
 	glVertex3f(-RenderWidth,-1.0f, RenderDepth);			
 	glEnd();
+	glPopAttrib();
 	glPopMatrix();
 }
 

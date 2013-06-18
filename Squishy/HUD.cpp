@@ -52,7 +52,13 @@ void HUD::Render()
 	{
 		glBindTexture( GL_TEXTURE_2D, GameOverScreenTexture);
 		glBegin(GL_QUADS);
-		drawGameOverScreen();
+		drawScreen();
+	}
+	if(gamestate2->getWin() == true)
+	{
+		glBindTexture( GL_TEXTURE_2D, heartTexture);
+		glBegin(GL_QUADS);
+		drawScreen();
 	}
 	glEnd();
 	glPopAttrib();
@@ -79,16 +85,16 @@ void HUD::DrawLives(int i)
 		glVertex2f(glutGet(GLUT_SCREEN_WIDTH) - (20 + 75*i), 20);
 }
 
-void HUD::drawGameOverScreen()
+void HUD::drawScreen()
 {
 	glTexCoord2f(0, 1);
-		glVertex2f(0,  glutGet(GLUT_SCREEN_HEIGHT));
-		glTexCoord2f(1, 1);
-		glVertex2f(glutGet(GLUT_SCREEN_WIDTH), glutGet(GLUT_SCREEN_HEIGHT));
-		glTexCoord2f(1, 0);
-		glVertex2f(glutGet(GLUT_SCREEN_WIDTH), 0);
-		glTexCoord2f(0, 0);
-		glVertex2f(0, 0);
+	glVertex2f(0,  glutGet(GLUT_SCREEN_HEIGHT));
+	glTexCoord2f(1, 1);
+	glVertex2f(glutGet(GLUT_SCREEN_WIDTH), glutGet(GLUT_SCREEN_HEIGHT));
+	glTexCoord2f(1, 0);
+	glVertex2f(glutGet(GLUT_SCREEN_WIDTH), 0);
+	glTexCoord2f(0, 0);
+	glVertex2f(0, 0);
 }
 
 //Derived classes all have this class, it functions as the method that allows you to implement logic

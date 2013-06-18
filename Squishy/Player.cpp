@@ -25,7 +25,25 @@ float inkDis;
 float angle = -90.0f;
 GameState *gamestate;
 int previousLives;
+cv::Point endPoint;
+cv::Point startPoint;
 
+Player::Player(GameState *state, cv::Point startP, cv::Point endP)
+{
+	startPoint = startP;
+	endPoint = endP;
+	gamestate = state;
+	objCam.Position_Camera(0, 1.5f, 4.0f,	0, 1.5f, 0,   0, 1.0f, 0);
+	SKYUP = objCam.loadTexture("caustics.jpg");
+	SKYFRONT = objCam.loadTexture("JellyfishSea.png");
+	SKYBACK = SKYFRONT;
+	SKYLEFT = SKYFRONT;
+	SKYRIGHT = SKYFRONT;
+	ironTexture = objCam.loadTexture("ironTexture.jpg");
+	squishyTexture = objCam.loadTexture("squishyTexture.png");
+	currentTexture = objCam.loadTexture("squishyTexture.png");
+
+}
 Player::Player(GameState *state)
 {
 	gamestate = state;
@@ -35,7 +53,7 @@ Player::Player(GameState *state)
 	SKYBACK = SKYFRONT;
 	SKYLEFT = SKYFRONT;
 	SKYRIGHT = SKYFRONT;
-	ironTexture = objCam.loadTexture("ironTexture.png");
+	ironTexture = objCam.loadTexture("ironTexture.jpg");
 	squishyTexture = objCam.loadTexture("squishyTexture.png");
 	currentTexture = objCam.loadTexture("squishyTexture.png");
 
@@ -184,7 +202,14 @@ void Player::Update()
 		objCam.Position_Camera(0, 1.5f, 4.0f,	0, 1.5f, 0,   0, 1.0f, 0);
 	}
 	previousLives = gamestate->getLives();
+	tVector3 pos = objCam.mPos;
+	
+	if(endPoint.x == pos.x && endPoint.y == pos.y)
+	{
+		gamestate->winGame();
+	}
 }
+
 
 //Using this method you can process normalkeys
 void Player::processNormalKeys(unsigned char key, int x, int y)

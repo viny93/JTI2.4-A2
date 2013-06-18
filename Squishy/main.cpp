@@ -204,45 +204,28 @@ void processNormalKeys(unsigned char key, int x, int y)
 
 		glutSetCursor(GLUT_CURSOR_NONE); 
 
-		renderObjects.push_back(new Player(state2));
+		//texturizeBackground(2);
+		introTexture  =  tl.loadTexture("Intro.png");
+
+		detection = new Detection();
+
+		std::vector<cv::Point> startEnd = detection->detectStartEnd();
+
+		if(startEnd.size() >= 2)
+		{
+			renderObjects.push_back(new Player(state2, startEnd[0], startEnd[1] ));
+		}
+		else
+		{
+			renderObjects.push_back(new Player(state2));
+		}
+
 		renderObjects.push_back(new World());
 		renderObjects.push_back(new JellyFish());
 		renderObjects.push_back(new UnderwaterFilter());
 		//renderObjects.push_back(new JellyFish());
 
 		renderObjects.push_back(new HUD(state2));
-
-		//texturizeBackground(2);
-		introTexture  =  tl.loadTexture("Intro.png");
-
-		detection = new Detection();
-		
-		int enemysize = (sizeof(detection->detectEnemies()) / sizeof(cv::Point));
-		for(int i = 0; i<enemysize; i++)
-		{
-			cv::Point coordinate = detection->detectEnemies()[i];
-			cv::Point worldcoordinate = world->getBottomLeft();
-			//Enemy toevoegen
-		}
-
-		std::vector<cv::Point> points = detection->detectTraps();
-
-		int trapsize = points.size();
-		for(int i = 0; i<trapsize; i++)
-		{
-			cv::Point coordinate = points[i];
-			cv::Point worldcoordinate = world->getBottomLeft();
-			renderObjects.push_back(new Trap(coordinate,worldcoordinate));
-		}
-
-		points = detection->detectStartEnd();
-		int startendsize = points.size();
-		for(int i = 0; i<startendsize; i++)
-		{
-			cv::Point coordinate = points[i];
-			cv::Point worldcoordinate = world->getBottomLeft();
-			//Start/einde toevoegen
-		}
 
 		////////////DIT TOEVOEGEN//////////////////////////////////////////////
 		std::vector<cv::Point> enemycoordinates = detection->detectEnemies();		

@@ -14,7 +14,7 @@ public:
 	void processNormalKeys(unsigned char key, int x, int y);
 	void processSpecialKeys(int key, int xx, int yy);
 	void DrawLives(int i);
-	void drawGameOverScreen();
+	void drawScreen();
 private:
 	float ratio;
 };

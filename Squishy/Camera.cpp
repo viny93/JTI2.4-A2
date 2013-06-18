@@ -119,3 +119,4 @@ GLuint CCamera::loadTexture(char *filename)
 
 	return textureId;
 }
+

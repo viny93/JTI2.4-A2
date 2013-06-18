@@ -3,6 +3,7 @@
 #include <GL/glut.h>
 
 int points;
+bool win;
 int lives = 3;
 //int gamestate;
 GLuint lifeTexture;
@@ -11,6 +12,7 @@ GameState::GameState(void)
 {
 	lives = 3;
 	points = 0;
+	win = false;
 	//lifeTexture  =  loadTexture("Squishy.png");
 }
 
@@ -42,6 +44,11 @@ void GameState::die()
 	{
 		points++;
 	}
+	
+	void GameState::winGame()
+	{
+		win = true;
+	}
 
 	void GameState::addPoints(int number)
 	{
@@ -56,4 +63,9 @@ void GameState::die()
 	int GameState::getLives()
 	{
 		return lives;
+	}
+
+	bool GameState::getWin()
+	{
+		return win;
 	}

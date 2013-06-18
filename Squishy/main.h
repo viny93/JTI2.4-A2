@@ -34,7 +34,7 @@ class CCamera
 	public:
 		tVector3 mPos;							
 		tVector3 mView;							
-		tVector3 mUp;				
+		tVector3 mUp;	
 
 		void Strafe_Camera(float speed);
 		void Rotate_Position(float speed);
@@ -45,6 +45,9 @@ class CCamera
 							 float view_x, float view_y, float view_z,
 							 float up_x,   float up_y,   float up_z);
 		GLuint loadTexture(char *filename);
+
+	private:
+		bool checkCollisionWithCubes(int, int);
 };
 
 extern	HDC			hDC;				// Device context

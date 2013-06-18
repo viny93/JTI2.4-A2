@@ -14,4 +14,6 @@ public:
 	void processNormalKeys(unsigned char key, int x, int y);
 	void processSpecialKeys(int key, int xx, int yy);
 	cv::Point getBottomLeft(void);
+
+	static std::vector<cv::Point> getListOfCubes(void);
 };

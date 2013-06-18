@@ -314,10 +314,17 @@ int main(int argc, char **argv)
 
 	glutSetCursor(GLUT_CURSOR_NONE);
 
-	renderObjects.push_back(new Player(state2));
-	renderObjects.push_back(new World());
-
 	detection = new Detection();
+	std::vector<cv::Point> startEnd = detection->detectStartEnd();
+	if(startEnd.size() >= 2)
+	{
+			 renderObjects.push_back(new Player(state2, startEnd[0], startEnd[1] ));
+	}
+	else
+	{
+			 renderObjects.push_back(new Player(state2));
+	}
+	renderObjects.push_back(new World());
 
 	std::vector<cv::Point> enemycoordinates = detection->detectEnemies();	
 	std::vector<cv::Point> trapcoordinates = detection->detectTraps();	

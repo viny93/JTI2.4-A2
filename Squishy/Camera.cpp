@@ -1,5 +1,51 @@
 #include "main.h"  
 #include "stb_image.h"
+#include "World.h"
+#include <vector>
+#include<opencv\cv.h>
+
+#include <iostream>
+
+bool CCamera::checkCollisionWithCubes(int x, int z)
+{
+	std::vector<cv::Point> coordsListWallsForCamera;
+	coordsListWallsForCamera = World::getListOfCubes();
+	float steppedX, steppedZ, deltaX, deltaZ;
+	cv::Point currentPoint;
+	
+	float correction = 512.0f / 60.0f;
+	float correctedXView = (mView.x + 30) * correction;
+	float correctedZView = (mView.z + 60) * correction;
+	float correctedXMoved = (mView.x + 30) * correction;
+	float correctedZMoved = (mView.z + 60) * correction;
+	
+	for(int i = 0; i < coordsListWallsForCamera.size(); i++)
+	{
+		currentPoint = coordsListWallsForCamera[i];
+		deltaX = abs(correctedXMoved - currentPoint.x);
+		deltaZ = abs(correctedZMoved - currentPoint.y);
+
+		if(deltaX < 10.0f && deltaZ < 10.0f)
+		{
+			std::cout << "X: "<< deltaX << "; Z: " << deltaZ << std::endl;
+			//return false;
+			for(int i = 0; i < 10; i++)
+			{
+				steppedX = mView.x + (x * (i / 10));
+				steppedZ = mView.z + (z * (i / 10));
+				if(abs(steppedX - z) < .2f)
+				{
+					if(abs(steppedZ - x) < .2f)
+					{
+						//return false;
+					}
+				}
+			}
+		}
+	}
+
+	return true;
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 //										THE CCAMERA POSITION CAMERA
@@ -20,11 +66,16 @@ void CCamera::Move_Camera(float speed)
 {
 	tVector3 vVector = mView - mPos;	// Get the view vector
 	
-	// forward positive camera speed and backward negative camera speed.
-	mPos.x  = mPos.x  + vVector.x * speed;
-	mPos.z  = mPos.z  + vVector.z * speed;
-	mView.x = mView.x + vVector.x * speed;
-	mView.z = mView.z + vVector.z * speed;
+	float moveX = mView.x + vVector.x * speed;
+	float moveZ = mView.z + vVector.z * speed;
+	if(checkCollisionWithCubes(moveX, moveZ))
+	{
+		mPos.x  = mPos.x  + vVector.x * speed;
+		mPos.z  = mPos.z  + vVector.z * speed;
+		mView.x = moveX;
+		mView.z = moveZ;
+	}
+
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////

@@ -25,6 +25,8 @@ float random_x_array[100];
 float random_z_array[100];
 ObjModel* seaweed = new ObjModel("seaweed.obj");
 
+std::vector<cv::Point> coordsListWalls;
+
 cv::Mat heightMapImage;
 
 void createFloor()
@@ -53,6 +55,7 @@ void createFloor()
 
 void buildHeightmap()
 {
+	coordsListWalls.clear();
 	glPushMatrix();
 	glScalef(0.1f, 1, 0.1f);
 
@@ -75,6 +78,7 @@ void buildHeightmap()
 							continue;
 						if(heightMapImage.at<UCHAR>(y+yy,(x+xx)*3) != 0)
 						{
+							coordsListWalls.push_back(cv::Point(x, y));
 							if(xx == 0)
 							{
 								glVertex3f(y+0.5f*yy,0,x+0.5f);
@@ -92,9 +96,7 @@ void buildHeightmap()
 						}
 					}
 				}
-
 			}
-
 		}
 	}
 	glEnd();
@@ -202,4 +204,9 @@ void World::processSpecialKeys(int key, int xx, int yy)
 cv::Point World::getBottomLeft()
 {
 	return bottomleft;
+}
+
+std::vector<cv::Point> World::getListOfCubes()
+{
+	return coordsListWalls;
 }

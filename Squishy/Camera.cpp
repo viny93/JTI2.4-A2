@@ -8,16 +8,18 @@
 
 bool CCamera::checkCollisionWithCubes(int x, int z)
 {
+	return true; //Comment this to activate collision
+
 	std::vector<cv::Point> coordsListWallsForCamera;
 	coordsListWallsForCamera = World::getListOfCubes();
 	float steppedX, steppedZ, deltaX, deltaZ;
 	cv::Point currentPoint;
 	
 	float correction = 512.0f / 60.0f;
-	float correctedXView = (mView.x + 30) * correction;
-	float correctedZView = (mView.z + 60) * correction;
-	float correctedXMoved = (mView.x + 30) * correction;
-	float correctedZMoved = (mView.z + 60) * correction;
+	float correctedXView = (mView.x + 30.0f) * correction;
+	float correctedZView = (mView.z + 60.0f) * correction;
+	float correctedXMoved = (x + 30.0f) * correction;
+	float correctedZMoved = (z + 60.0f) * correction;
 	
 	for(int i = 0; i < coordsListWallsForCamera.size(); i++)
 	{
@@ -27,20 +29,7 @@ bool CCamera::checkCollisionWithCubes(int x, int z)
 
 		if(deltaX < 10.0f && deltaZ < 10.0f)
 		{
-			std::cout << "X: "<< deltaX << "; Z: " << deltaZ << std::endl;
-			//return false;
-			for(int i = 0; i < 10; i++)
-			{
-				steppedX = mView.x + (x * (i / 10));
-				steppedZ = mView.z + (z * (i / 10));
-				if(abs(steppedX - z) < .2f)
-				{
-					if(abs(steppedZ - x) < .2f)
-					{
-						//return false;
-					}
-				}
-			}
+			return false;
 		}
 	}
 

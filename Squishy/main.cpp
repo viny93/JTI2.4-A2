@@ -221,9 +221,9 @@ void updateAll(void)
 		}
 		else
 		{
-			if(renderObjects[i]->type == RenderObject::ENEMY)
+			if(renderObjects[i]->type == RenderObject::ENEMY || renderObjects[i]->type == RenderObject::TRAP)
 			{
-				float deltaX = (PlayerX - renderObjects[i]->RenderPositionY - 8.0f);
+				float deltaX = (PlayerX - renderObjects[i]->RenderPositionY);
 				if(deltaX < 0)
 					deltaX = -deltaX;
 
@@ -231,7 +231,7 @@ void updateAll(void)
 
 				if(deltaX < deltaDepth)
 				{
-					float deltaY = (PlayerY - renderObjects[i]->RenderPositionX) - 35.0f;
+					float deltaY = (PlayerY - renderObjects[i]->RenderPositionX);
 					if(deltaY < 0)
 						deltaY = -deltaY;
 

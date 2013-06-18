@@ -7,7 +7,8 @@ public:
 		{
 			WORLD,
 			PLAYER,
-			ENEMY
+			ENEMY,
+			TRAP
 		};
 
 	//	cv::Point RenderCoordinates;

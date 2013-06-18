@@ -19,7 +19,7 @@ Trap::Trap(cv::Point coordinates,cv::Point worldcoordinates)
 	this->coordinates = coordinates;
 	this->worldcoordinates = worldcoordinates;
 
-	type = ENEMY;
+	type = TRAP;
 	RenderPositionX = coordinates.x;
 	RenderPositionY = coordinates.y;
 	RenderWidth = 5.0f;
@@ -57,7 +57,6 @@ void Trap::Update()
 		//-99999999 lifes
 	}
 }
-
 
 
 

@@ -19,8 +19,8 @@ Enemy::Enemy(cv::Point coordinates,cv::Point worldcoordinates)
 	type = ENEMY;
 	RenderPositionX = (float) coordinates.x;
 	RenderPositionY = (float) coordinates.y;
-	RenderWidth = 2.0f;
-	RenderDepth = 2.0f;
+	RenderWidth = 35.0f;
+	RenderDepth = 5.0f;
 	
 	_movementX = 0.0f;
 	_movementY = 60.0f;

@@ -8,7 +8,8 @@ public:
 			WORLD,
 			PLAYER,
 			ENEMY,
-			TRAP
+			TRAP,
+			FRIENDLY
 		};
 
 	//	cv::Point RenderCoordinates;

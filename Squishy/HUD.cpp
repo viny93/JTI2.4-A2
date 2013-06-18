@@ -8,6 +8,7 @@
 
 CCamera hudcam; 
 GLuint heartTexture;
+GLuint winScreenTexture;
 GLuint GameOverScreenTexture;
 GameState *gamestate2;
 
@@ -16,6 +17,7 @@ HUD::HUD(GameState *state)
 	gamestate2 = state;
 	heartTexture = hudcam.loadTexture("heartTexture.png");
 	GameOverScreenTexture = hudcam.loadTexture("GameOverScreen.png");
+	winScreenTexture = hudcam.loadTexture("WinScreenTexture.png");
 	ratio = 1.0* glutGet(GLUT_SCREEN_WIDTH)/ glutGet(GLUT_SCREEN_HEIGHT);
 }
 
@@ -39,7 +41,15 @@ void HUD::Render()
 	
 
 	//Draw life icons here:
-	if(gamestate2->getLives() > 0)
+	if(gamestate2->getWin() == true)
+	{
+		glBindTexture( GL_TEXTURE_2D, winScreenTexture);
+		glBegin(GL_QUADS);
+		drawScreen();
+		glEnd();
+		glPopAttrib();
+	}
+	else if(gamestate2->getLives() > 0)
 	{
 		glBindTexture( GL_TEXTURE_2D, heartTexture );
 		glBegin(GL_QUADS);
@@ -47,21 +57,18 @@ void HUD::Render()
 		{
 			DrawLives(i);
 		}
+		glEnd();
+		glPopAttrib();
 	}
 	else
 	{
 		glBindTexture( GL_TEXTURE_2D, GameOverScreenTexture);
 		glBegin(GL_QUADS);
 		drawScreen();
+		glEnd();
+		glPopAttrib();
 	}
-	if(gamestate2->getWin() == true)
-	{
-		glBindTexture( GL_TEXTURE_2D, heartTexture);
-		glBegin(GL_QUADS);
-		drawScreen();
-	}
-	glEnd();
-	glPopAttrib();
+	
 
 	//end of drawing hud
 	glPopMatrix();

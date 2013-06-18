@@ -13,6 +13,7 @@
 #include "stb_image.h"
 #include "Detection.h"
 #include "Trap.h"
+#include "Friendly.h"
 #include <mmsystem.h>
 #include <process.h>
 #include "Screens.h"
@@ -245,6 +246,30 @@ void updateAll(void)
 					}
 				}
 			}
+			else if(renderObjects[i]->type == RenderObject::FRIENDLY)
+			{
+				float deltaX = (PlayerX - renderObjects[i]->RenderPositionY);
+				if(deltaX < 0)
+					deltaX = -deltaX;
+
+				float deltaDepth = (PlayerDepth + renderObjects[i]->RenderDepth);
+
+				if(deltaX < deltaDepth)
+				{
+					float deltaY = (PlayerY - renderObjects[i]->RenderPositionX);
+					if(deltaY < 0)
+						deltaY = -deltaY;
+
+					float deltaWidth = (PlayerWidth + renderObjects[i]->RenderWidth);
+
+					if(deltaY < deltaWidth)
+					{
+						state2->winGame();
+						_invuln = true;
+						_invulnCount = 150;
+					}
+				}
+			}
 		} 
 	}
 	renderScene();
@@ -315,15 +340,7 @@ int main(int argc, char **argv)
 	glutSetCursor(GLUT_CURSOR_NONE);
 
 	detection = new Detection();
-	std::vector<cv::Point> startEnd = detection->detectStartEnd();
-	if(startEnd.size() >= 2)
-	{
-			 renderObjects.push_back(new Player(state2, startEnd[0], startEnd[1] ));
-	}
-	else
-	{
-			 renderObjects.push_back(new Player(state2));
-	}
+	renderObjects.push_back(new Player(state2));
 	renderObjects.push_back(new World());
 
 	std::vector<cv::Point> enemycoordinates = detection->detectEnemies();	
@@ -349,13 +366,15 @@ int main(int argc, char **argv)
 		}
 	}
 
-	if(startendcoordinates.size() > 0 )
+	if(startendcoordinates.size() >= 2 )
 	{
-		for(int i = 0; i< startendcoordinates.size(); i++)
-		{
-			cv::Point coordinate = startendcoordinates.at(i);
-			//Start/einde toevoegen
-		}
+		cv::Point coordinate = startendcoordinates.at(2);
+		renderObjects.push_back(new Friendly(coordinate,worldcoordinate));
+		//for(int i = 0; i< startendcoordinates.size(); i++)
+		//{
+		//	cv::Point coordinate = startendcoordinates.at(i);
+		//	//Start/einde toevoegen
+		//}
 	}
 
 	renderObjects.push_back(new UnderwaterFilter());

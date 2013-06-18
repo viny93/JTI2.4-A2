@@ -184,18 +184,18 @@ void Player::Update()
 	{
 		moveBox = true;
 	}
-	else if(skybox > 0.2f)
+	else if(skybox > 0.6f)
 	{
 		moveBox = false;
 	}
 
 	if(moveBox)
 	{
-		skybox += 0.001f;
+		skybox += 0.003f;
 	}
 	else
 	{
-		skybox -= 0.001f;
+		skybox -= 0.003f;
 	}
 	if(gamestate->getLives() < previousLives)
 	{

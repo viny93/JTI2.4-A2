@@ -248,7 +248,7 @@ int main(int argc, char **argv)
 	glEnable(GL_FOG);
 	glFogfv(GL_FOG_COLOR,FogCol);
 	glFogi(GL_FOG_MODE, GL_EXP2);
-	glFogf(GL_FOG_DENSITY, 0.1f);
+	glFogf(GL_FOG_DENSITY, 0.125f);
 	glHint(GL_FOG_HINT, GL_NICEST);
 
 	glutKeyboardFunc(processNormalKeys);

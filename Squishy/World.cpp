@@ -172,18 +172,18 @@ void World::Update()
 	{
 		movecaustics = true;
 	}
-	else if(caustics > 0.2f)
+	else if(caustics > 0.6f)
 	{
 		movecaustics = false;
 	}
 
 	if(movecaustics)
 	{
-		caustics += 0.001f;
+		caustics += 0.003f;
 	}
 	else
 	{
-		caustics -= 0.001f;
+		caustics -= 0.003f;
 	}
 }
 

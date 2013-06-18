@@ -79,27 +79,27 @@ void Enemy::Update()
 
 	if(_variationX < 0)
 	{
-		_movementX++;
+		_movementX+=0.5;
 	}
 	else
 	{
-		_movementX--;
+		_movementX-=0.5;
 	}
 
 	if(_variationY < 0)
 	{
-		_movementY++;
+		_movementY+=0.5;
 	}
 	else
 	{
-		_movementY--;
+		_movementY-=0.5;
 	}
 
 	_variationX += _movementX / 100;
 	_variationY += _movementY / 100;
 
-	RenderPositionX += _movementX / 100;
-	RenderPositionY += _movementY / 100;
+	RenderPositionX += _movementX*2 / 100;
+	RenderPositionY += _movementY*2 / 100;
 }
 
 //Using this method you can process normalkeys

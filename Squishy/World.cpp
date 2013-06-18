@@ -3,15 +3,28 @@
 #include <GL/glut.h>
 #include <GL/GL.h>
 #include "main.h"
+#include "ObjModel.h"
+#include "stb_image.h"
+#include "Vec3.h"
 
 CCamera world; 
 GLuint floorTexture;
 GLuint blendingTexture;
+GLuint rockTexture;
+
+int levelSizeX = 120;
+int levelSizeZ = 60;
 
 float caustics = 0.0f;
 bool movecaustics;
 
 cv::Point bottomleft;
+float random_x_array[100];
+float random_z_array[100];
+ObjModel* seaweed = new ObjModel("seaweed.obj");
+
+unsigned char* heightmapData;
+int heightmapWidth, heightmapHeight, heightmapDepth;
 
 void createFloor()
 {
@@ -26,7 +39,60 @@ void createFloor()
 	glVertex3f(bottomleft.x, 0, bottomleft.y);
 	glTexCoord2f(1, 0);
 	glVertex3f(-bottomleft.x, 0, bottomleft.y);
+	glVertex3f(-levelSizeZ/2, 0, -levelSizeX/2);
+	glTexCoord2f(0, 1);
+	glVertex3f(levelSizeZ/2, 0, -levelSizeX/2);
+	glTexCoord2f(1, 1);
+	glVertex3f(levelSizeZ/2, 0, levelSizeX/2);
+	glTexCoord2f(1, 0);
+	glVertex3f(-levelSizeZ/2, 0, levelSizeX/2);
 
+	glEnd();
+}
+
+void buildHeightmap()
+{
+	#define heightmap(x,y) heightmapData[heightmapDepth*((x) + (y) * heightmapWidth)] * 0.01f - 0.2f
+	glBindTexture(GL_TEXTURE, rockTexture);
+	glBegin(GL_TRIANGLES);
+	for(int x = 0; x < heightmapWidth-1; x++)
+	{
+		for(int y = 0; y < heightmapHeight-1; y++)
+		{
+			{
+				Vec3 a((x-heightmapWidth/2)*0.2f, heightmap(x,y), (y-heightmapHeight/2) * 0.2f);
+				Vec3 b((x+1-heightmapWidth/2)*0.2f, heightmap(x+1,y), (y-heightmapHeight/2) * 0.2f);
+				Vec3 c((x+1-heightmapWidth/2)*0.2f, heightmap(x+1,y+1), (y+1-heightmapHeight/2) * 0.2f);
+				Vec3 edge1 = c - b;
+				Vec3 edge2 = a - b;
+
+				Vec3 normal = edge2.cross(edge1);
+				normal = normal / normal.length();
+
+				glNormal3f(normal.x,normal.y,normal.z);
+				glTexCoord2f(a.x * 0.1f, a.z * 0.1f); glVertex3f(a.x, a.y, a.z);
+				glTexCoord2f(b.x * 0.1f, b.z * 0.1f); glVertex3f(b.x, b.y, b.z);
+				glTexCoord2f(c.x * 0.1f, c.z * 0.1f); glVertex3f(c.x, c.y, c.z);
+			}
+
+			{
+				Vec3 a((x-heightmapWidth/2)*0.2f, heightmap(x,y), (y-heightmapHeight/2) * 0.2f);
+				Vec3 b((x+1-heightmapWidth/2)*0.2f, heightmap(x+1,y+1), (y+1-heightmapHeight/2) * 0.2f);
+				Vec3 c((x-heightmapWidth/2)*0.2f, heightmap(x,y+1), (y+1-heightmapHeight/2) * 0.2f);
+				Vec3 edge1 = c - b;
+				Vec3 edge2 = a - b;
+
+				Vec3 normal = edge2.cross(edge1);
+				normal = normal / normal.length();
+
+				glNormal3f(normal.x,normal.y,normal.z);
+				glTexCoord2f(a.x * 0.1f, a.z * 0.1f); glVertex3f(a.x, a.y, a.z);
+				glTexCoord2f(b.x * 0.1f, b.z * 0.1f); glVertex3f(b.x, b.y, b.z);
+				glTexCoord2f(c.x * 0.1f, c.z * 0.1f); glVertex3f(c.x, c.y, c.z);
+			}
+
+		}
+	}
 	glEnd();
 }
 
@@ -50,10 +116,18 @@ void createCausticFloor()
 
 World::World(void)
 {
-	floorTexture = world.loadTexture("background1.jpg");
+	rockTexture = world.loadTexture("rockTexture.jpg");
+	floorTexture = world.loadTexture("background1.png");
 	blendingTexture = world.loadTexture("caustics.jpg");
 	bottomleft.x = 30;
 	bottomleft.y = 60;
+	
+	for(int i = 0; i < 99; i ++) 
+			{
+				random_x_array[i] = (rand() % levelSizeX); 
+				random_z_array[i] = (rand() % levelSizeZ);
+	}
+	heightmapData = stbi_load("heightmap.png", &heightmapWidth, &heightmapHeight, &heightmapDepth, 4);
 }
 
 World::~World(void)
@@ -66,9 +140,23 @@ void World::Render()
 {
 	createFloor();
 	glEnable (GL_BLEND);
-	glBlendFunc (GL_ONE, GL_ONE);
+	glBlendFunc (GL_DST_COLOR, GL_ONE);
 	createCausticFloor();
 	glDisable(GL_BLEND);
+
+	for(int i = 0; i < 50; i ++) 
+			{
+				glPushMatrix();
+					glTranslatef(random_z_array[i] - levelSizeZ/2, 0, random_x_array[i] - levelSizeX/2);
+					glPushAttrib( GL_CURRENT_BIT );
+						glScalef(0.05f,0.03f,0.05f);
+						glColor3f(0.1f,1.0f,0.1f);
+						seaweed->draw();
+					glPopAttrib();
+				glPopMatrix();
+	}
+	//glTranslated(0,-2.0f,0);
+	buildHeightmap();
 }
 
 //Derived classes all have this class, it functions as the method that allows you to implement logic

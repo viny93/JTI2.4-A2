@@ -4,6 +4,7 @@
 #include <windows.h>
 #include "main.h"
 #include "ObjModel.h"
+#include "GameState.h"
 
 CCamera objCam; 
 GLuint SKYFRONT;
@@ -16,20 +17,48 @@ float skybox = 0.0f;
 bool moveBox;
 ObjModel* squishy = new ObjModel("squishy1.obj");
 GLuint squishyTexture;
+GLuint ironTexture;
+GLuint currentTexture;
+bool ink = false;
+bool iron = false;
+float inkDis;
+float angle = -90.0f;
+GameState *gamestate;
+int previousLives;
 
-Player::Player(void)
+Player::Player(GameState *state)
 {
+	gamestate = state;
 	objCam.Position_Camera(0, 1.5f, 4.0f,	0, 1.5f, 0,   0, 1.0f, 0);
 	SKYUP = objCam.loadTexture("caustics.jpg");
 	SKYFRONT = objCam.loadTexture("JellyfishSea.png");
 	SKYBACK = SKYFRONT;
 	SKYLEFT = SKYFRONT;
 	SKYRIGHT = SKYFRONT;
+	ironTexture = objCam.loadTexture("ironTexture.png");
 	squishyTexture = objCam.loadTexture("squishyTexture.png");
+	currentTexture = objCam.loadTexture("squishyTexture.png");
+
 }
 
 Player::~Player(void)
 {
+}
+
+void inkUpdate()
+{
+	if(ink)
+	{
+		if(inkDis >= 5.0f)
+		{
+			ink = false;
+			inkDis = 0.0f;
+		}
+		else
+		{
+		inkDis += 0.1f;
+		}
+	}
 }
 
 void Draw_Skybox(float x, float y, float z, float width, float height, float length)
@@ -102,23 +131,36 @@ void Player::Render()
 			  objCam.mUp.x,   objCam.mUp.y,   objCam.mUp.z);	
 
 	glPushMatrix();
-	glTranslatef(objCam.mView.x,1.4f,objCam.mView.z);
-
-	glScaled(0.3,0.3,0.3);
-	glBindTexture(GL_TEXTURE_2D, squishyTexture);
-	squishy->draw();
+		glTranslatef(objCam.mView.x,0.85f,objCam.mView.z);
+		glRotatef(angle,0,1,0); //  rotate around center
+		glTranslatef(-objCam.mView.x, 0, -objCam.mView.z); //move object to center
+		glTranslatef(objCam.mView.x,0,objCam.mView.z);
+		glScaled(0.3,0.3,0.3);
+		glBindTexture(GL_TEXTURE_2D, currentTexture);
+		squishy->draw();
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslated(skybox, 0, skybox);
-	Draw_Skybox(0,0,0,500, 15, 500);	
+		glTranslatef(objCam.mView.x,0.50f,objCam.mView.z);
+		glRotatef(angle-165.0f,0,1,0); 
+		glTranslatef(inkDis*2, 0.0f, inkDis);
+		glPushAttrib( GL_CURRENT_BIT );
+		glColor4f(0,0,0,0.9f);
+		glutSolidSphere(0.2f, 15,15);
+		glPopAttrib();
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslated(skybox, 0, skybox);
+		Draw_Skybox(0,0,0,500, 15, 500);	
 	glPopMatrix();
 }
 
 //Derived classes all have this class, it functions as the method that allows you to implement logic
 void Player::Update()
-{
+{ 
 	objCam.Mouse_Move(500, 500);
+	inkUpdate();
 
 	if(skybox < 0)
 	{
@@ -137,24 +179,54 @@ void Player::Update()
 	{
 		skybox -= 0.001f;
 	}
+	if(gamestate->getLives() < previousLives)
+	{
+		objCam.Position_Camera(0, 1.5f, 4.0f,	0, 1.5f, 0,   0, 1.0f, 0);
+	}
+	previousLives = gamestate->getLives();
 }
 
 //Using this method you can process normalkeys
 void Player::processNormalKeys(unsigned char key, int x, int y)
 {
 	switch (key) {
-	case 'f' :
+	case 'f' : //left
 		objCam.Strafe_Camera(-CAMERASPEED);
 		break;
-	case 'h' :
+	case 'h' : //right
 		objCam.Strafe_Camera(CAMERASPEED);
-		break;
-	case 't' :
+		break;		
+	case 't' : //up
 		objCam.Move_Camera(CAMERASPEED);	
 		break;
-	case 'g' :
-		objCam.Move_Camera(-CAMERASPEED);	
+	case 'g' : //down
+		objCam.Move_Camera(-CAMERASPEED);
 		break;
+	case 'r' : //rotate left
+			angle+=5.0f;
+		break;
+	case 'y' : //rotate left
+			angle-=5.0f;
+		break;
+	case 'q' : //shoot
+			ink = true;
+		break;
+		case 32 : //shoot
+					gamestate->die();
+		break;
+	case 'i' : //iron mode
+		if (iron == false)
+		{
+			iron = true;
+			currentTexture = ironTexture;
+		}
+		else if (iron == true)
+		{
+			iron = false;
+			currentTexture = squishyTexture;
+		}
+		break;
+
 	case 'z': 
 		glutDestroyWindow(0);
 		exit (0);

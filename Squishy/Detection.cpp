@@ -1,7 +1,7 @@
 #include"Detection.h"
 #include<opencv\cv.h>
 #include<opencv\highgui.h>
-#include<opencv\BlobResult.h>
+#include "BlobResult.h"
 
 using namespace cv;
 
@@ -13,7 +13,7 @@ std::vector<cv::Point> enemycoords, trapcoords,startendcoords;
 
 Detection::Detection()
 {
-	image = cv::imread("background1.jpg");	
+	image = cv::imread("background.png");	
 }
 
 std::vector<cv::Point> Detection::detectEnemies()
@@ -52,7 +52,7 @@ std::vector<cv::Point> Detection::detectTraps()
 		
 		blobimage = eroded;
 		storeCoords(blobimage,2);
-
+		
 		return trapcoords;
 }
 

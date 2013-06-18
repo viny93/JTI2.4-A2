@@ -8,7 +8,6 @@
 
 bool activated = false;
 
-
 Trap::Trap(cv::Point coordinates,cv::Point worldcoordinates)
 {
 	this->coordinates = coordinates;
@@ -26,11 +25,11 @@ void Trap::Render()
 {
 	glPushMatrix();
 	
-    glTranslatef((coordinates.y/(512/60) - worldcoordinates.x -1.5f)*0.85f,0,(coordinates.x/(512/60) - worldcoordinates.y - 3.0f)*0.85f);
+     glTranslatef((coordinates.y/(512/60) - worldcoordinates.x -1.5f)*0.85f,0,(coordinates.x/(512/60) - worldcoordinates.y - 3.0f)*0.85f);
 
 	glPushAttrib(GL_CURRENT_BIT);
 
-  glBegin(GL_QUADS);				  // Draw The Cube Using quads
+       glBegin(GL_QUADS);				  // Draw The Cube Using quads
     glColor3f(0.0f,1.0f,0.0f);		  // Color Blue
     glVertex3f( 1.0f, 1.0f,-1.0f);    // Top Right Of The Quad (Top)
     glVertex3f(-1.0f, 1.0f,-1.0f);    // Top Left Of The Quad (Top)

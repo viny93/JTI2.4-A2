@@ -20,10 +20,10 @@ Trap::Trap(cv::Point coordinates,cv::Point worldcoordinates)
 	this->worldcoordinates = worldcoordinates;
 
 	type = ENEMY;
-	RenderPositionX = worldcoordinates.x;
-	RenderPositionY = worldcoordinates.y;
-	RenderWidth = 1.0f;
-	RenderDepth = 1.0f;
+	RenderPositionX = coordinates.x;
+	RenderPositionY = coordinates.y;
+	RenderWidth = 5.0f;
+	RenderDepth = 5.0f;
 
 	jellyTexture = jellycam.loadTexture("jellyfishTexture.png");
 }

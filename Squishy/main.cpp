@@ -217,7 +217,6 @@ void updateAll(void)
 			if(_invulnCount == 0)
 			{
 				_invuln = false;
-				std::cout << "Invuln has worn off!" << std::endl;
 			}
 		}
 		else
@@ -236,13 +235,10 @@ void updateAll(void)
 					if(deltaY < 0)
 						deltaY = -deltaY;
 
-					std::cout << "Y: " << deltaY << std::endl;
 					float deltaWidth = (PlayerWidth + renderObjects[i]->RenderWidth);
 
 					if(deltaY < deltaWidth)
 					{
-						//Here code for what to do when killed
-						std::cout << "I AM MELTING!" << std::endl;
 						state2->die();
 						_invuln = true;
 						_invulnCount = 150;

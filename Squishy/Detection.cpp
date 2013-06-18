@@ -23,7 +23,7 @@ std::vector<cv::Point> Detection::detectEnemies()
 		//Omzetten naar HSV plaatje.
 		cvtColor(image,hsv,CV_BGR2HSV);	
 		//Threshold
-		cv::inRange(hsv,cv::Scalar(0,80,100),cv::Scalar(10,255,255),thresholded); 
+		cv::inRange(hsv,cv::Scalar(0,173,250),cv::Scalar(19,255,255),thresholded); 
 		//Closing
 		Mat closingmat(25,25,CV_8U,cv::Scalar(1));
 		cv::morphologyEx(thresholded,closed,cv::MORPH_CLOSE,closingmat);
@@ -43,7 +43,7 @@ std::vector<cv::Point> Detection::detectTraps()
 		//Omzetten naar HSV plaatje.
 		cvtColor(image,hsv,CV_BGR2HSV);	
 		//Threshold
-		cv::inRange(hsv,cv::Scalar(20,120,200),cv::Scalar(200,255,225),thresholded); 
+		cv::inRange(hsv,cv::Scalar(100,10,161),cv::Scalar(145,159,225),thresholded); 
 		//Closing
 		Mat closingmat(25,25,CV_8U,cv::Scalar(1));
 		cv::morphologyEx(thresholded,closed,cv::MORPH_CLOSE,closingmat);

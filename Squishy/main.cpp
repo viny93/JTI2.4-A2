@@ -246,7 +246,6 @@ void processNormalKeys(unsigned char key, int x, int y)
 		//renderObjects.push_back(new UnderwaterFilter());
 		//renderObjects.push_back(new JellyFish());
 
-		renderObjects.push_back(new HUD(state2));
 
 		//texturizeBackground(2);
 		introTexture  =  tl.loadTexture("Intro.png");

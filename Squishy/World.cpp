@@ -117,7 +117,7 @@ void createCausticFloor()
 World::World(void)
 {
 	rockTexture = world.loadTexture("rockTexture.jpg");
-	floorTexture = world.loadTexture("background1.png");
+	floorTexture = world.loadTexture("background.png");
 	blendingTexture = world.loadTexture("caustics.jpg");
 	bottomleft.x = 30;
 	bottomleft.y = 60;

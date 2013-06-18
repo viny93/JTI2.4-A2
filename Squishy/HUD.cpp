@@ -30,7 +30,7 @@ void HUD::Render()
 	glPushMatrix();
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(0, glutGet(GLUT_SCREEN_WIDTH), glutGet(GLUT_SCREEN_HEIGHT), 0, -1, 1);
+	glOrtho(0, glutGet(GLUT_SCREEN_WIDTH), glutGet(GLUT_SCREEN_HEIGHT), 0, 0, 1);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	glPushAttrib( GL_CURRENT_BIT );

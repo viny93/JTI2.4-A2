@@ -10,7 +10,7 @@
 
 #include <math.h>
 
-#define CAMERASPEED	0.05f				// The Camera Speed
+#define CAMERASPEED	0.065f				// The Camera Speed
 
 struct tVector3	// Extended 3D Vector Struct
 {			

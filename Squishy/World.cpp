@@ -5,6 +5,8 @@
 #include "main.h"
 #include "ObjModel.h"
 #include "stb_image.h"
+#include<opencv\highgui.h> 
+#include <opencv2\core\types_c.h>
 #include "Vec3.h"
 
 CCamera world; 
@@ -23,8 +25,7 @@ float random_x_array[100];
 float random_z_array[100];
 ObjModel* seaweed = new ObjModel("seaweed.obj");
 
-unsigned char* heightmapData;
-int heightmapWidth, heightmapHeight, heightmapDepth;
+cv::Mat heightMapImage;
 
 void createFloor()
 {
@@ -52,48 +53,52 @@ void createFloor()
 
 void buildHeightmap()
 {
-	#define heightmap(x,y) heightmapData[heightmapDepth*((x) + (y) * heightmapWidth)] * 0.01f - 0.2f
-	glBindTexture(GL_TEXTURE, rockTexture);
-	glBegin(GL_TRIANGLES);
-	for(int x = 0; x < heightmapWidth-1; x++)
+	glPushMatrix();
+	glScalef(0.1f, 1, 0.1f);
+
+	glTranslatef(-heightMapImage.cols/2.13, 0, -heightMapImage.rows*1.252);
+	glScalef(1.25f,1,1.88f);
+	glBegin(GL_QUADS);
+	for(int x = 0; x < heightMapImage.cols; x++)
 	{
-		for(int y = 0; y < heightmapHeight-1; y++)
+		for(int y = 0; y < heightMapImage.rows; y++)
 		{
+			if (heightMapImage.at<UCHAR>(y,x*3) == 0)
 			{
-				Vec3 a((x-heightmapWidth/2)*0.2f, heightmap(x,y), (y-heightmapHeight/2) * 0.2f);
-				Vec3 b((x+1-heightmapWidth/2)*0.2f, heightmap(x+1,y), (y-heightmapHeight/2) * 0.2f);
-				Vec3 c((x+1-heightmapWidth/2)*0.2f, heightmap(x+1,y+1), (y+1-heightmapHeight/2) * 0.2f);
-				Vec3 edge1 = c - b;
-				Vec3 edge2 = a - b;
+				for(int xx = -1; xx <= 1; xx++)
+				{
+					for(int yy = -1; yy <= 1; yy++)
+					{
+						if(x+xx < 0 || x+xx >= heightMapImage.cols || y+yy < 0 || y+yy >= heightMapImage.rows)
+							continue;
+						if(abs(xx) + abs(yy) != 1)
+							continue;
+						if(heightMapImage.at<UCHAR>(y+yy,(x+xx)*3) != 0)
+						{
+							if(xx == 0)
+							{
+								glVertex3f(y+0.5f*yy,0,x+0.5f);
+								glVertex3f(y+0.5f*yy,10,x+0.5f);
+								glVertex3f(y+0.5f*yy,10,x-0.5f);
+								glVertex3f(y+0.5f*yy,0,x-0.5f);
+							}
+							if(yy == 0)
+							{
+								glVertex3f(y+0.5f,0,x+0.5f*xx);
+								glVertex3f(y+0.5f,10,x+0.5f*xx);
+								glVertex3f(y-0.5f,10,x+0.5f*xx);
+								glVertex3f(y-0.5f,0,x+0.5f*xx);
+							}
+						}
+					}
+				}
 
-				Vec3 normal = edge2.cross(edge1);
-				normal = normal / normal.length();
-
-				glNormal3f(normal.x,normal.y,normal.z);
-				glTexCoord2f(a.x * 0.1f, a.z * 0.1f); glVertex3f(a.x, a.y, a.z);
-				glTexCoord2f(b.x * 0.1f, b.z * 0.1f); glVertex3f(b.x, b.y, b.z);
-				glTexCoord2f(c.x * 0.1f, c.z * 0.1f); glVertex3f(c.x, c.y, c.z);
-			}
-
-			{
-				Vec3 a((x-heightmapWidth/2)*0.2f, heightmap(x,y), (y-heightmapHeight/2) * 0.2f);
-				Vec3 b((x+1-heightmapWidth/2)*0.2f, heightmap(x+1,y+1), (y+1-heightmapHeight/2) * 0.2f);
-				Vec3 c((x-heightmapWidth/2)*0.2f, heightmap(x,y+1), (y+1-heightmapHeight/2) * 0.2f);
-				Vec3 edge1 = c - b;
-				Vec3 edge2 = a - b;
-
-				Vec3 normal = edge2.cross(edge1);
-				normal = normal / normal.length();
-
-				glNormal3f(normal.x,normal.y,normal.z);
-				glTexCoord2f(a.x * 0.1f, a.z * 0.1f); glVertex3f(a.x, a.y, a.z);
-				glTexCoord2f(b.x * 0.1f, b.z * 0.1f); glVertex3f(b.x, b.y, b.z);
-				glTexCoord2f(c.x * 0.1f, c.z * 0.1f); glVertex3f(c.x, c.y, c.z);
 			}
 
 		}
 	}
 	glEnd();
+	glPopMatrix();
 }
 
 void createCausticFloor()
@@ -116,47 +121,48 @@ void createCausticFloor()
 
 World::World(void)
 {
-	rockTexture = world.loadTexture("rockTexture.jpg");
-	floorTexture = world.loadTexture("background1.png");
+	rockTexture = world.loadTexture("rockTexture.png");
+	floorTexture = world.loadTexture("background.png");
 	blendingTexture = world.loadTexture("caustics.jpg");
 	bottomleft.x = 30;
 	bottomleft.y = 60;
-	
+	heightMapImage = cv::imread("modMap.png");
 	for(int i = 0; i < 99; i ++) 
-			{
-				random_x_array[i] = (rand() % levelSizeX); 
-				random_z_array[i] = (rand() % levelSizeZ);
+	{
+		random_x_array[i] = (rand() % levelSizeX); 
+		random_z_array[i] = (rand() % levelSizeZ);
 	}
-	heightmapData = stbi_load("heightmap.png", &heightmapWidth, &heightmapHeight, &heightmapDepth, 4);
 }
 
 World::~World(void)
 {
-	
+
 }
 
 //Functions as a sort of internal renderScene, add all drawing code for this object here
 void World::Render()
 {
+	//glScalef(0.1f,0.1f,0.1f);
 	createFloor();
+	glBindTexture(GL_TEXTURE, rockTexture);
+	buildHeightmap();
 	glEnable (GL_BLEND);
 	glBlendFunc (GL_DST_COLOR, GL_ONE);
 	createCausticFloor();
 	glDisable(GL_BLEND);
 
 	for(int i = 0; i < 50; i ++) 
-			{
-				glPushMatrix();
-					glTranslatef(random_z_array[i] - levelSizeZ/2, 0, random_x_array[i] - levelSizeX/2);
-					glPushAttrib( GL_CURRENT_BIT );
-						glScalef(0.05f,0.03f,0.05f);
-						glColor3f(0.1f,1.0f,0.1f);
-						seaweed->draw();
-					glPopAttrib();
-				glPopMatrix();
+	{
+		glPushMatrix();
+		glTranslatef(random_z_array[i] - levelSizeZ/2, 0, random_x_array[i] - levelSizeX/2);
+		glPushAttrib( GL_CURRENT_BIT );
+		glScalef(0.05f,0.03f,0.05f);
+		glColor3f(0.1f,1.0f,0.1f);
+		seaweed->draw();
+		glPopAttrib();
+		glPopMatrix();
 	}
 	//glTranslated(0,-2.0f,0);
-	buildHeightmap();
 }
 
 //Derived classes all have this class, it functions as the method that allows you to implement logic

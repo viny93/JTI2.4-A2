@@ -16,7 +16,6 @@
     <ClCompile Include="..\Enemy.cpp" />
     <ClCompile Include="..\GameState.cpp" />
     <ClCompile Include="..\HUD.cpp" />
-    <ClCompile Include="..\JellyFish.cpp" />
     <ClCompile Include="..\main.cpp" />
     <ClCompile Include="..\ObjModel.cpp" />
     <ClCompile Include="..\Player.cpp" />
@@ -32,7 +31,6 @@
     <ClInclude Include="..\Enemy.h" />
     <ClInclude Include="..\GameState.h" />
     <ClInclude Include="..\HUD.h" />
-    <ClInclude Include="..\JellyFish.h" />
     <ClInclude Include="..\main.h" />
     <ClInclude Include="..\ObjModel.h" />
     <ClInclude Include="..\Player.h" />
@@ -81,9 +79,11 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
+      <Optimization>MaxSpeed</Optimization>
       <AdditionalIncludeDirectories>$(OPENCV_BUILD)\include;$(SolutionDir)\freeglut\include;$(SolutionDir)\\cvblobslib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

@@ -45,9 +45,6 @@
     <ClCompile Include="..\TGALoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JellyFish.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\Detection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -98,14 +95,11 @@
     <ClInclude Include="..\TGALoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\JellyFish.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\Detection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Trap.h">
-	  <Filter>Header Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\HUD.h">
       <Filter>Header Files</Filter>

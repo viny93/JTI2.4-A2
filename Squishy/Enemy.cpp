@@ -3,8 +3,13 @@
 #include <GL/GL.h>
 #include <windows.h>
 #include <opencv\cv.h>
-
 #include <iostream>
+#include "ObjModel.h"
+#include "main.h"
+
+GLuint sharktexture;
+ObjModel* sharkModel = new ObjModel("shark.obj");
+CCamera sharkcam; 
 
 Enemy::Enemy(cv::Point coordinates,cv::Point worldcoordinates)
 {
@@ -22,6 +27,7 @@ Enemy::Enemy(cv::Point coordinates,cv::Point worldcoordinates)
 	_variationX = 2.1f;
 	_variationY = 0.0f;
 	_count = 0; //Remove when using VSync
+	sharktexture = sharkcam.loadTexture("sharktexture.png");
 }
 
 Enemy::~Enemy(void)
@@ -34,23 +40,29 @@ void Enemy::Render()
 {
 	glPushMatrix();
 
-    glTranslatef(RenderPositionY/(512/60) - worldcoordinates.x,1.0f,RenderPositionX/(512/60) - worldcoordinates.y);
+	glTranslatef((RenderPositionY/(512/60) - worldcoordinates.x -1.5f)*0.9f,0,(RenderPositionX/(512/60) - worldcoordinates.y - 3.0f)*0.9f);
 	glPushAttrib(GL_CURRENT_BIT);
-	glBegin(GL_TRIANGLES);				
-	glColor3f(1.0f,0.0f,0.0f);				
-	glVertex3f( 0.0f, 1.0f, 0.0f);			
-	glVertex3f(-RenderWidth,-1.0f, RenderDepth);			
-	glVertex3f( RenderWidth,-1.0f, RenderDepth);		
-	glVertex3f( 0.0f, 1.0f, 0.0f);						
-	glVertex3f( RenderWidth,-1.0f, RenderDepth);					
-	glVertex3f( RenderWidth,-1.0f, -RenderDepth);					
-	glVertex3f( 0.0f, 1.0f, 0.0f);					
-	glVertex3f( RenderWidth,-1.0f, -RenderDepth);					
-	glVertex3f(-RenderWidth,-1.0f, -RenderDepth);						
-	glVertex3f( 0.0f, 1.0f, 0.0f);					
-	glVertex3f(-RenderWidth,-1.0f,-RenderDepth);					
-	glVertex3f(-RenderWidth,-1.0f, RenderDepth);			
-	glEnd();
+	//glBegin(GL_TRIANGLES);				
+	//glColor3f(1.0f,0.0f,0.0f);				
+	//glVertex3f( 0.0f, 1.0f, 0.0f);			
+	//glVertex3f(-RenderWidth,-1.0f, RenderDepth);			
+	//glVertex3f( RenderWidth,-1.0f, RenderDepth);		
+	//glVertex3f( 0.0f, 1.0f, 0.0f);						
+	//glVertex3f( RenderWidth,-1.0f, RenderDepth);					
+	//glVertex3f( RenderWidth,-1.0f, -RenderDepth);					
+	//glVertex3f( 0.0f, 1.0f, 0.0f);					
+	//glVertex3f( RenderWidth,-1.0f, -RenderDepth);					
+	//glVertex3f(-RenderWidth,-1.0f, -RenderDepth);						
+	//glVertex3f( 0.0f, 1.0f, 0.0f);					
+	//glVertex3f(-RenderWidth,-1.0f,-RenderDepth);					
+	//glVertex3f(-RenderWidth,-1.0f, RenderDepth);			
+	//glEnd();
+	glTranslatef(0.0f, 0.5f, 0.0f);
+	glScalef(0.10f, 0.10f, 0.10f);
+	glBindTexture(GL_TEXTURE_2D, sharktexture);
+	glBlendFunc (GL_SRC_COLOR, GL_ONE);
+	sharkModel->draw();
+
 	glPopAttrib();
 	glPopMatrix();
 }

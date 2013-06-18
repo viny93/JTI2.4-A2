@@ -30,9 +30,14 @@ cv::Point startPoint;
 
 Player::Player(GameState *state, cv::Point startP, cv::Point endP)
 {
+	//Alter these values to change the bounding box for the player
+	RenderWidth = 1.0f;
+	RenderDepth = 1.0f;
+
 	startPoint = startP;
 	endPoint = endP;
 	gamestate = state;
+	type = PLAYER;
 	objCam.Position_Camera(0, 1.5f, 4.0f,	0, 1.5f, 0,   0, 1.0f, 0);
 	SKYUP = objCam.loadTexture("caustics.jpg");
 	SKYFRONT = objCam.loadTexture("JellyfishSea.png");
@@ -42,11 +47,16 @@ Player::Player(GameState *state, cv::Point startP, cv::Point endP)
 	ironTexture = objCam.loadTexture("ironTexture.jpg");
 	squishyTexture = objCam.loadTexture("squishyTexture.png");
 	currentTexture = objCam.loadTexture("squishyTexture.png");
-
 }
+
 Player::Player(GameState *state)
 {
+	//Alter these values to change the bounding box for the player
+	RenderWidth = .3f;
+	RenderDepth = .3f;
+
 	gamestate = state;
+	type = PLAYER;
 	objCam.Position_Camera(0, 1.5f, 4.0f,	0, 1.5f, 0,   0, 1.0f, 0);
 	SKYUP = objCam.loadTexture("caustics.jpg");
 	SKYFRONT = objCam.loadTexture("JellyfishSea.png");
@@ -56,7 +66,6 @@ Player::Player(GameState *state)
 	ironTexture = objCam.loadTexture("ironTexture.jpg");
 	squishyTexture = objCam.loadTexture("squishyTexture.png");
 	currentTexture = objCam.loadTexture("squishyTexture.png");
-
 }
 
 Player::~Player(void)
@@ -74,7 +83,7 @@ void inkUpdate()
 		}
 		else
 		{
-		inkDis += 0.1f;
+			inkDis += 0.1f;
 		}
 	}
 }
@@ -178,6 +187,8 @@ void Player::Render()
 void Player::Update()
 { 
 	objCam.Mouse_Move(500, 500);
+	RenderPositionX = objCam.mView.x;
+	RenderPositionY = objCam.mView.z;
 	inkUpdate();
 
 	if(skybox < 0)

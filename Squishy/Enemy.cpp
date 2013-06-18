@@ -17,10 +17,10 @@ Enemy::Enemy(cv::Point coordinates,cv::Point worldcoordinates)
 	this->worldcoordinates = worldcoordinates;
 	
 	type = ENEMY;
-	RenderPositionX = coordinates.x;
-	RenderPositionY = coordinates.y;
-	RenderWidth = 1.0f;
-	RenderDepth = 1.0f;
+	RenderPositionX = (float) coordinates.x;
+	RenderPositionY = (float) coordinates.y;
+	RenderWidth = 2.0f;
+	RenderDepth = 2.0f;
 	
 	_movementX = 0.0f;
 	_movementY = 60.0f;
@@ -42,21 +42,7 @@ void Enemy::Render()
 
 	glTranslatef((RenderPositionY/(512/60) - worldcoordinates.x -1.5f)*0.9f,0,(RenderPositionX/(512/60) - worldcoordinates.y - 3.0f)*0.9f);
 	glPushAttrib(GL_CURRENT_BIT);
-	//glBegin(GL_TRIANGLES);				
-	//glColor3f(1.0f,0.0f,0.0f);				
-	//glVertex3f( 0.0f, 1.0f, 0.0f);			
-	//glVertex3f(-RenderWidth,-1.0f, RenderDepth);			
-	//glVertex3f( RenderWidth,-1.0f, RenderDepth);		
-	//glVertex3f( 0.0f, 1.0f, 0.0f);						
-	//glVertex3f( RenderWidth,-1.0f, RenderDepth);					
-	//glVertex3f( RenderWidth,-1.0f, -RenderDepth);					
-	//glVertex3f( 0.0f, 1.0f, 0.0f);					
-	//glVertex3f( RenderWidth,-1.0f, -RenderDepth);					
-	//glVertex3f(-RenderWidth,-1.0f, -RenderDepth);						
-	//glVertex3f( 0.0f, 1.0f, 0.0f);					
-	//glVertex3f(-RenderWidth,-1.0f,-RenderDepth);					
-	//glVertex3f(-RenderWidth,-1.0f, RenderDepth);			
-	//glEnd();
+
 	glTranslatef(0.0f, 0.5f, 0.0f);
 	glScalef(0.10f, 0.10f, 0.10f);
 	glBindTexture(GL_TEXTURE_2D, sharktexture);

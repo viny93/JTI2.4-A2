@@ -41,6 +41,9 @@ GameState *state2;
 Detection *detection;
 World* world;
 
+bool _invuln;
+int _invulnCount;
+
 cv::Mat makeHeightmap(int cam)
 {
 	cv::VideoCapture cap(cam);
@@ -184,6 +187,21 @@ void renderScene(void)
 //also deletes objects that are no longer alive (alive = false, can be invoked with Kill())
 void updateAll(void)
 {	
+	//Extracts player related data
+	RenderObject *_player = renderObjects[0];
+	float PlayerX = _player->RenderPositionX;
+	float PlayerY = _player->RenderPositionY;
+	float PlayerWidth = _player->RenderWidth;
+	float PlayerDepth = _player->RenderDepth;
+
+	PlayerX += 30;
+	PlayerY += 60;
+
+	float correction = 512.0f / 60.0f;
+
+	PlayerX = PlayerX * correction;
+	PlayerY = PlayerY * correction;
+	
 	for(int i = 0; i < renderObjects.size(); i++)
 	{
 		renderObjects[i]->Update();
@@ -192,6 +210,46 @@ void updateAll(void)
 			delete renderObjects[i];
 			renderObjects.erase(renderObjects.begin() + i);	
 		}
+
+		if(_invuln)
+		{
+			_invulnCount--;
+			if(_invulnCount == 0)
+			{
+				_invuln = false;
+				std::cout << "Invuln has worn off!" << std::endl;
+			}
+		}
+		else
+		{
+			if(renderObjects[i]->type == RenderObject::ENEMY)
+			{
+				float deltaX = (PlayerX - renderObjects[i]->RenderPositionY - 8.0f);
+				if(deltaX < 0)
+					deltaX = -deltaX;
+
+				float deltaDepth = (PlayerDepth + renderObjects[i]->RenderDepth);
+
+				if(deltaX < deltaDepth)
+				{
+					float deltaY = (PlayerY - renderObjects[i]->RenderPositionX) - 35.0f;
+					if(deltaY < 0)
+						deltaY = -deltaY;
+
+					std::cout << "Y: " << deltaY << std::endl;
+					float deltaWidth = (PlayerWidth + renderObjects[i]->RenderWidth);
+
+					if(deltaY < deltaWidth)
+					{
+						//Here code for what to do when killed
+						std::cout << "I AM MELTING!" << std::endl;
+						state2->die();
+						_invuln = true;
+						_invulnCount = 150;
+					}
+				}
+			}
+		} 
 	}
 	renderScene();
 }
@@ -303,6 +361,8 @@ int main(int argc, char **argv)
 
 	introTexture = tl.loadTexture("Intro.png");
 
+	_invuln = true;
+	_invulnCount = 150;
 
 	glutMainLoop();
 }

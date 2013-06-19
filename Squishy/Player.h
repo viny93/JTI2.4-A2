@@ -7,10 +7,10 @@ class Player :
 	public RenderObject
 {
 public:
-	Player(GameState *state, cv::Point startP, cv::Point endP);
 	Player(GameState *state);
 	~Player(void);
 
+	void SetPosition(cv::Point coordinates,cv::Point worldcoordinates);
 	void Render();
 	void Update();
 	void processNormalKeys(unsigned char key, int x, int y);

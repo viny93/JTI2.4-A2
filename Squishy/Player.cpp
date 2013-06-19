@@ -25,29 +25,7 @@ float inkDis;
 float angle = -90.0f;
 GameState *gamestate;
 int previousLives;
-cv::Point endPoint;
-cv::Point startPoint;
-
-Player::Player(GameState *state, cv::Point startP, cv::Point endP)
-{
-	//Alter these values to change the bounding box for the player
-	RenderWidth = 1.0f;
-	RenderDepth = 1.0f;
-
-	startPoint = startP;
-	endPoint = endP;
-	gamestate = state;
-	type = PLAYER;
-	objCam.Position_Camera(0, 1.5f, 4.0f,	0, 1.5f, 0,   0, 1.0f, 0);
-	SKYUP = objCam.loadTexture("caustics.jpg");
-	SKYFRONT = objCam.loadTexture("JellyfishSea.png");
-	SKYBACK = SKYFRONT;
-	SKYLEFT = SKYFRONT;
-	SKYRIGHT = SKYFRONT;
-	ironTexture = objCam.loadTexture("ironTexture.jpg");
-	squishyTexture = objCam.loadTexture("squishyTexture.png");
-	currentTexture = objCam.loadTexture("squishyTexture.png");
-}
+tVector3 beginPos = tVector3(0, 1.5f, 4.0f);
 
 Player::Player(GameState *state)
 {
@@ -57,7 +35,7 @@ Player::Player(GameState *state)
 
 	gamestate = state;
 	type = PLAYER;
-	objCam.Position_Camera(0, 1.5f, 4.0f,	0, 1.5f, 0,   0, 1.0f, 0);
+	objCam.Position_Camera(beginPos.x, 1.5f, beginPos.z,	0, 1.5f, 0,   0, 1.0f, 0);
 	SKYUP = objCam.loadTexture("caustics.jpg");
 	SKYFRONT = objCam.loadTexture("JellyfishSea.png");
 	SKYBACK = SKYFRONT;
@@ -210,15 +188,9 @@ void Player::Update()
 	}
 	if(gamestate->getLives() < previousLives)
 	{
-		objCam.Position_Camera(0, 1.5f, 4.0f,	0, 1.5f, 0,   0, 1.0f, 0);
+		objCam.Position_Camera(beginPos.x, 1.5f, beginPos.z,	beginPos.x, 1.5f, beginPos.z - 4.0f,   0, 1.0f, 0);
 	}
 	previousLives = gamestate->getLives();
-	tVector3 pos = objCam.mPos;
-	
-	if(endPoint.x == pos.x && endPoint.y == pos.y)
-	{
-		gamestate->winGame();
-	}
 }
 
 
@@ -274,4 +246,10 @@ void Player::processNormalKeys(unsigned char key, int x, int y)
 void Player::processSpecialKeys(int key, int xx, int yy)
 {
 
+}
+
+void Player::SetPosition(cv::Point coordinates,cv::Point worldcoordinates)
+{
+	beginPos = tVector3((coordinates.y/(512/60) - worldcoordinates.x -1.5f)*0.9f, 0, (coordinates.x/(512/60) - worldcoordinates.y - 3.0f)*0.9f);
+	objCam.Position_Camera(beginPos.x, 1.5f, beginPos.z,	beginPos.x, 1.5f, beginPos.z - 4.0f,   0, 1.0f, 0);
 }

@@ -340,7 +340,9 @@ int main(int argc, char **argv)
 	glutSetCursor(GLUT_CURSOR_NONE);
 
 	detection = new Detection();
-	renderObjects.push_back(new Player(state2));
+	Player * p = new Player(state2);
+
+	renderObjects.push_back(p);
 	renderObjects.push_back(new World());
 
 	std::vector<cv::Point> enemycoordinates = detection->detectEnemies();	
@@ -368,11 +370,16 @@ int main(int argc, char **argv)
 
 	if(startendcoordinates.size() >= 2 )
 	{
-		cv::Point coordinate = startendcoordinates.at(2);
+		//gele post-it's zitten op positie 0 en positie 4 van deze array list
+		cv::Point coordinate = startendcoordinates.at(0);
 		renderObjects.push_back(new Friendly(coordinate,worldcoordinate));
+		coordinate = startendcoordinates.at(1);
+		p -> SetPosition(coordinate,worldcoordinate);
+
 		//for(int i = 0; i< startendcoordinates.size(); i++)
 		//{
 		//	cv::Point coordinate = startendcoordinates.at(i);
+		//	renderObjects.push_back(new Friendly(coordinate,worldcoordinate));
 		//	//Start/einde toevoegen
 		//}
 	}
